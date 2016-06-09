@@ -4,85 +4,96 @@ navbar:
   type: inverse
   left:
 
-    - text: "About"
-      icon: fa-info
-      href: about.html
-    - text: "Chapters 1-16"
+    - text: "Part I"
       icon: fa-file
       menu:
         - text: "Part I Exploring and Understanding Data"
-        - text: "Chapter 01"
+        - text: "Chapter 01 : Stats Starts Here"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter01.pdf
-        - text: "Chapter 02"
+        - text: "Chapter 02 : Displaying and Describing Categorical Data"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter02.pdf
-        - text: "Chapter 03"
+        - text: "Chapter 03 : Displaying and Summarizing Quantitative Data"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter03.pdf
-        - text: "Chapter 04"
+        - text: "Chapter 04 : Understanding and Comparing Distributions"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter04.pdf
-        - text: "Chapter 05"
+        - text: "Chapter 05 : The Standard Devitation as a Ruler and the Normal Model"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter05.pdf
-        - text: "---------"
+    - text: "Part II"
+      icon: fa-file
+      menu:
         - text: "Part II Exploring Relationships Between Variables"
-        - text: "Chapter 06"
+        - text: "Chapter 06 : Scatterplots, Association, and Correlation"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter06.pdf
-        - text: "Chapter 07"
+        - text: "Chapter 07 : Linear Regression"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter07.pdf
-        - text: "Chapter 08"
+        - text: "Chapter 08 : Regression Wisdom"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter08.pdf
-        - text: "Chapter 09"
+        - text: "Chapter 09 : Re-expressing Data: Get it Straight!"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter09.pdf
-        - text: "---------"
+    - text: "Part III"
+      icon: fa-file
+      menu:
         - text: "Part III Gathering Data"
-        - text: "Chapter 10"
+        - text: "Chapter 10 : Understanding Randomness"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter10.pdf
-        - text: "Chapter 11"
+        - text: "Chapter 11 : Sample Surveys"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter11.pdf
-        - text: "Chapter 12"
+        - text: "Chapter 12 : Experiments and Observational Studies"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter12.pdf
-        - text: "---------" 
+    - text: "Part IV"
+      icon: fa-file
+      menu:
         - text: "Part IV Randomness and Probability"
-        - text: "Chapter 13"
+        - text: "Chapter 13 : From Randomness to Probability"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter13.pdf
-        - text: "Chapter 14"
+        - text: "Chapter 14 : Probability Rules!"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter14.pdf
-        - text: "Chapter 15"
+        - text: "Chapter 15 : Random Variables"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter15.pdf
-        - text: "Chapter 16"
+        - text: "Chapter 16 : Probability Models"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter16.pdf
-    - text: "Chapters 17-29"
+    - text: "Part V"
       icon: fa-file
       menu:
         - text: "Part V From the Data at Hand to the World at Large"
-        - text: "Chapter 17"
+        - text: "Chapter 17 : Sampling Distribution Models"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter17.pdf
-        - text: "Chapter 18"
+        - text: "Chapter 18 : Confidence Intervals for Proportions"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter18.pdf
-        - text: "Chapter 19"
+        - text: "Chapter 19 : Testing Hypotheses about Proportions"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter19.pdf
-        - text: "Chapter 20"
+        - text: "Chapter 20 : Inferences about Means"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter20.pdf
-        - text: "Chapter 21"
+        - text: "Chapter 21 : More about Tests and Intervals"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter21.pdf
-        - text: "---------" 
+    - text: "Part VI"
+      icon: fa-file
+      menu:
         - text: "Part VI Accessing Associations Between Variables"
-        - text: "Chapter 22"
+        - text: "Chapter 22 : Comparing Groups"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter22.pdf
-        - text: "Chapter 23"
+        - text: "Chapter 23 : Paired Samples and Blocks"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter23.pdf
-        - text: "Chapter 24"
+        - text: "Chapter 24 : Comparing Counts"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter24.pdf
-        - text: "Chapter 25"
+        - text: "Chapter 25 : Inferences for Regression"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter25.pdf
-        - text: "---------" 
+    - text: "Part VII"
+      icon: fa-file
+      menu:
         - text: "Part VII Inference When Variables are Related"
-        - text: "Chapter 26"
+        - text: "Chapter 26* : Analysis of Variance"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter26.pdf
-        - text: "Chapter 27"
+        - text: "Chapter 27 : Multifactor Analysis of Variance"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter27.pdf
-        - text: "Chapter 28"
+        - text: "Chapter 28 : Multiple Regression"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter28.pdf
-        - text: "Chapter 29"
+        - text: "Chapter 29 : Multiple Regression Wisdom"
           href: https://www3.amherst.edu/~nhorton/sdm4/Chapter29.pdf
+    - text: "About"
+      icon: fa-info
+      href: about.html
+        
         
   right:
     - icon: fa-question fa-lg
