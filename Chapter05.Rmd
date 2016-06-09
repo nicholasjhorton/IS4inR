@@ -1,7 +1,7 @@
 ---
-title: "IS4 in R: Displaying and Describing Catergorical Data (Chapter 2)"
+title: "IS4 in R: The Standard Deviation as a Ruler and the Normal Model (Chapter 5)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 6, 2016"
+date: "June 7, 2016"
 output: 
   pdf_document:
     fig_height: 4
@@ -35,7 +35,7 @@ opts_chunk$set(
 )
 ```
 
-## Introduction and Background 
+## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
@@ -44,35 +44,78 @@ file as well as the associated R Markdown reproducible analysis source file used
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
 
-## Chapter 2: Displaying and Describing Categorical Data
+## Chapter 5: The Standard Deviation as a Ruler and the Normal Model
 
-### Section 2.1: Summarizing and Displaying a Single Categorical Variable
+### Section 5.1: Standardizing with Z-Scores
 
-See displays on page 17.
+From page 111
 
 ```{r}
 library(mosaic); library(readr)
+options(na.rm=TRUE)
 options(digits=3)
-Titanic <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Titanic.txt", delim="\t")
-tally(~ Class, data=Titanic)
-tally(~ Class, format="percent", data=Titanic)
-barchart(tally(~ Class, data=Titanic))
+(6.63-6.11)/0.238  # Dobrynska's jump was 2.18 SD's greater than the mean
 ```
 
-### Section 2.2: Exploring the Relationship Between Two Categorical Variables
-
-See display on page 19.
-
 ```{r}
-tally(~ Survived + Class, margin=TRUE, data=Titanic)
-tally(~ Survived | Class, format="percent", data=Titanic)
+Heptathlon <- 
+read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Womens_Heptathlon_2012.txt",
+  delim="\t")
+nrow(Heptathlon)  
+filter(Heptathlon, LJ >= max(LJ, na.rm=TRUE)) %>% data.frame()
+favstats(~ LJ, data=Heptathlon)
+(6.54 - mean(~ LJ, data=Heptathlon))/sd(~ LJ, data=Heptathlon)
 ```
 
-See display on page 22.
-```{r}
-barplot(tally(~ Survived + Class, data=Titanic), beside=TRUE)
-mosaicplot(tally(~ Survived + Class, data=Titanic), 
-           main="Mosaic plot of Class by Survival",
-           color=TRUE)
+### Section 5.2: Shifting and Scaling
 
+### Section 5.3: Normal Models
+
+The 68-95-99.7 rule
+
+```{r, message=FALSE, warning=FALSE}
+xpnorm(c(-3, -1.96, -1, 1, 1.96, 3), mean=0, sd=1, verbose=FALSE)
+xpnorm(c(-3, -1.96, 1.96, 3), mean=0, sd=1, verbose=FALSE)
+xpnorm(c(-3, 3), mean=0, sd=1, verbose=FALSE)
+```
+
+Step-by-step (page 120)
+
+```{r}
+xpnorm(600, mean=500, sd=100)
+```
+
+### Section 5.4: Finding normal percentiles
+
+as on page 121
+
+```{r}
+xpnorm(680, mean=500, sd=100)
+qnorm(0.964, mean=500, sd=100)   # inverse of pnorm()
+qnorm(0.964, mean=0, sd=1)   # what is the z-score?
+```
+
+or on page 122
+
+```{r}
+xpnorm(450, mean=500, sd=100)
+```
+
+and page 123
+
+```{r}
+qnorm(.9, mean=500, sd=100)
+qnorm(.9, mean=0, sd=1)   # or as a Z-score
+```
+
+### Section 5.5: Normal Probability Plots
+
+See Figure 5.8 on page 127
+
+```{r}
+Nissan <- 
+read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Nissan.txt",
+  delim="\t")
+histogram(~ mpg, width=1, center=0.5, data=Nissan)
+qqmath(~ mpg, data=Nissan)
 ```
