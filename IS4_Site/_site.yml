@@ -1,0 +1,98 @@
+name: "SDM4-in-R"
+navbar:
+  title: "Stats Data & Models (version 4) in R"
+  type: inverse
+  left:
+
+    - text: "About"
+      icon: fa-info
+      href: about.html
+    - text: "Chapters 1-16"
+      icon: fa-file
+      menu:
+        - text: "Part I Exploring and Understanding Data"
+        - text: "Chapter 01"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter01.pdf
+        - text: "Chapter 02"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter02.pdf
+        - text: "Chapter 03"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter03.pdf
+        - text: "Chapter 04"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter04.pdf
+        - text: "Chapter 05"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter05.pdf
+        - text: "---------"
+        - text: "Part II Exploring Relationships Between Variables"
+        - text: "Chapter 06"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter06.pdf
+        - text: "Chapter 07"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter07.pdf
+        - text: "Chapter 08"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter08.pdf
+        - text: "Chapter 09"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter09.pdf
+        - text: "---------"
+        - text: "Part III Gathering Data"
+        - text: "Chapter 10"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter10.pdf
+        - text: "Chapter 11"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter11.pdf
+        - text: "Chapter 12"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter12.pdf
+        - text: "---------" 
+        - text: "Part IV Randomness and Probability"
+        - text: "Chapter 13"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter13.pdf
+        - text: "Chapter 14"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter14.pdf
+        - text: "Chapter 15"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter15.pdf
+        - text: "Chapter 16"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter16.pdf
+    - text: "Chapters 17-29"
+      icon: fa-file
+      menu:
+        - text: "Part V From the Data at Hand to the World at Large"
+        - text: "Chapter 17"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter17.pdf
+        - text: "Chapter 18"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter18.pdf
+        - text: "Chapter 19"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter19.pdf
+        - text: "Chapter 20"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter20.pdf
+        - text: "Chapter 21"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter21.pdf
+        - text: "---------" 
+        - text: "Part VI Accessing Associations Between Variables"
+        - text: "Chapter 22"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter22.pdf
+        - text: "Chapter 23"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter23.pdf
+        - text: "Chapter 24"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter24.pdf
+        - text: "Chapter 25"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter25.pdf
+        - text: "---------" 
+        - text: "Part VII Inference When Variables are Related"
+        - text: "Chapter 26"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter26.pdf
+        - text: "Chapter 27"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter27.pdf
+        - text: "Chapter 28"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter28.pdf
+        - text: "Chapter 29"
+          href: https://www3.amherst.edu/~nhorton/sdm4/Chapter29.pdf
+        
+  right:
+    - icon: fa-question fa-lg
+      href: http://www3.amherst.edu/~nhorton/sdm4/
+      
+      
+output:
+  html_document:
+    theme: readable
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css
