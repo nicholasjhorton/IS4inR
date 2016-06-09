@@ -87,12 +87,3 @@ navbar:
   right:
     - icon: fa-question fa-lg
       href: http://www3.amherst.edu/~nhorton/sdm4/
-      
-      
-output:
-  html_document:
-    theme: readable
-    highlight: textmate
-    include:
-      after_body: footer.html
-    css: styles.css
