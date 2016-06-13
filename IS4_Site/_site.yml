@@ -1,7 +1,7 @@
 name: "SDM4-in-R"
 navbar:
   title: "Stats Data & Models (version 4) in R"
-  type: default
+  type: inverse
   left:
 
     - text: "PDF and Rmd Files"
