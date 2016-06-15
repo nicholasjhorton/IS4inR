@@ -1,17 +1,17 @@
 ---
-  title: "IS4 in R: Regression Wisdom (Chapter 8)"
+title: "IS4 in R: Regression Wisdom (Chapter 8)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
 date: "June 10, 2016"
 output: 
   pdf_document:
-  fig_height: 4
-fig_width: 6
-html_document:
-  fig_height: 3
-fig_width: 5
-word_document:
-  fig_height: 4
-fig_width: 6
+    fig_height: 4
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 4
+    fig_width: 6
 ---
   
   
