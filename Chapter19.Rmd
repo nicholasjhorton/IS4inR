@@ -1,7 +1,7 @@
 ---
-title: "IS4 in R: Understanding Randomness (Chapter 9)"
+title: "More About Tests and Intervals (Chapter 19)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 13, 2016"
+date: "June 16, 2016"
 output: 
   pdf_document:
     fig_height: 4
@@ -46,18 +46,4 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
-## Chapter 9: Understanding Randomness
-
-### Section 9.1: What is Randomness? 
-
-### Section 9.2: Simulating by Hand
-
-Bwplot from page 257.
-
-```{r}
-library(mosaic); library(readr)
-data <- c(5,4,7,5,18,6,5,4,6) 
-data$ID <- seq.int(nrow(data))
-
-bwplot(~data, data=data)
-```
+## Chapter 19: More About Tests and Intervals

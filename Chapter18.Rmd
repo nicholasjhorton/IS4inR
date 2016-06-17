@@ -1,7 +1,7 @@
 ---
-title: "IS4 in R: Understanding Randomness (Chapter 9)"
+title: "Inferences about Means (Chapter 18)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 13, 2016"
+date: "June 16, 2016"
 output: 
   pdf_document:
     fig_height: 4
@@ -46,18 +46,52 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
-## Chapter 9: Understanding Randomness
+## Chapter 18: Inferences about Means
 
-### Section 9.1: What is Randomness? 
+### Section 18.1: The Central Limit Theorem
 
-### Section 9.2: Simulating by Hand
-
-Bwplot from page 257.
+Let's begin by reproducing the figure on the bottom of page 475.
 
 ```{r}
-library(mosaic); library(readr)
-data <- c(5,4,7,5,18,6,5,4,6) 
-data$ID <- seq.int(nrow(data))
-
-bwplot(~data, data=data)
+mu <- 1309
+sd <- 15.7
+xpnorm(c(mu-3*sd, mu-2*sd, mu-sd, mu+sd, mu+2*sd, mu+3*sd), mean=mu, sd=sd)
 ```
+
+### Section 18.2: Gosset's t
+
+Figure 18.1 (page 477) displays a normal curve (dashed green curve) and a t-model with 2 degrees of freedom (solid blue curve).
+
+```{r fig.keep="last"}
+plotDist("norm", lty=2, col="green", lwd=2)
+plotDist("t", params=2, lty=1, lwd=2, col="blue", add=TRUE)
+```
+
+We can reproduce the calculations for the Farmed salmon example (pages 479-480) using summary statistics:
+
+```{r}
+n <- 150; ybar <- 0.0913; s = 0.0495
+tstar <- qt(0.975, df=n-1); tstar
+ybar + c(-tstar, tstar)*s/sqrt(n)
+```
+
+or directly:
+
+```{r}
+Salmon <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Farmed_Salmon.csv")
+favstats(~ Mirex, data=Salmon)
+histogram(~ Mirex, width=0.01, center=0.01/2, data=Salmon)
+t.test(~ Mirex, data=Salmon)
+```
+
+We note that the distribution of measurements is not particularly normal.
+
+#### Section 18.4: A hypothesis test for the mean
+
+We can carry out the one-sided test outlined on page 486:
+
+```{r}
+tval <- (.0913-0.08)/0.0040; tval
+1-xpt(tval, df=149)
+```
+

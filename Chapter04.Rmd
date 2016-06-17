@@ -44,6 +44,8 @@ file as well as the associated R Markdown reproducible analysis source file used
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
 
+Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
+
 ## Chapter 4: Understanding and Comparing Distributions
 
 ### Section 4.1: Comparing Groups with Histograms
@@ -100,24 +102,3 @@ xyplot(AvgWindSpeed ~ DayofYear, type="l", data=Hopkins)
 xyplot(AvgWindSpeed ~ DayofYear, type=c("p", "smooth"), lwd=3, data=Hopkins)
 ```
 
-
-### Section 4.5: Re-Expressing Data: A First Look
-
-See Figure 4.7 on page 92
-```{r}
-CEO <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/CEO_Salary_2012.txt", delim="\t")
-favstats(~ One_Year_Pay, data=CEO)
-histogram(~ One_Year_Pay, width=2.5, center=1.24, data=CEO)
-```
-
-Figure 4.8 on page 93
-```{r}
-nrow(CEO)   # let's get rid of the CEO's with 0 salaries...
-CEO <- filter(CEO, One_Year_Pay > 0)
-nrow(CEO)
-CEO <- mutate(CEO, log10salary = log10(One_Year_Pay*1000000))
-histogram(~ log10salary, width=.25, center=.124, data=CEO)
-```
-
-On the log 10 scale, we can roughly interpret the values as the number
-of digits in the CEO salary.

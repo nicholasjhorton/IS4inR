@@ -1,7 +1,7 @@
 ---
-title: "IS4 in R: Understanding Randomness (Chapter 9)"
+title: "Paired Samples and Blocks (Chapter 21)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 13, 2016"
+date: "June 16, 2016"
 output: 
   pdf_document:
     fig_height: 4
@@ -46,18 +46,31 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
-## Chapter 9: Understanding Randomness
+## Chapter 21: Paired samples and Blocks
 
-### Section 9.1: What is Randomness? 
+### Section 21.1: Paired data
 
-### Section 9.2: Simulating by Hand
+The example on page 586 compares the mileage of 11 field workers using
+either a 5 day or 4 day schedule.
+```{r}
+require(mosaic)
+fiveday <- c(2798, 7724, 7505, 838, 4592, 8107, 1228, 8718, 1097, 8089, 3807)
+fourday <- c(2914, 6112, 6177, 1102, 3281, 4997, 1695, 6606, 1063, 6392, 3362)
+ds <- data.frame(fiveday, fourday)
+ds <- mutate(ds, diff = fiveday - fourday); ds
+```
 
-Bwplot from page 257.
+### Section 21.2: Assumptions and conditions
 
 ```{r}
-library(mosaic); library(readr)
-data <- c(5,4,7,5,18,6,5,4,6) 
-data$ID <- seq.int(nrow(data))
+histogram(~ diff, width=1000, center=500/2, data=ds)   # page 589
+t.test(~ diff, data=ds)
+```
 
-bwplot(~data, data=data)
+### Section 21.3: Confidence intervals for matched pairs
+
+The same result is seen as on page 595 for the confidence interval
+for the population difference in mileage using the (results not shown).
+```{r eval=FALSE}
+t.test(~ diff, data=ds)$conf.int
 ```

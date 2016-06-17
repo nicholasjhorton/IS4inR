@@ -44,6 +44,8 @@ file as well as the associated R Markdown reproducible analysis source file used
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
 
+Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
+
 ## Chapter 3: Displaying and Summarizing Quantitative Data
 
 ### Section 3.1: Displaying Quantitative Variables
@@ -127,7 +129,7 @@ To check the claim made on page 60
 sd(~ Magnitude, data=recent)
 var(~ Magnitude, data=recent)
 sqrt(var(~ Magnitude, data=recent))
-0.71^2
+0.705^2
 ```
 
 The standard deviation squared equals the variance.
