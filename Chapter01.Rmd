@@ -46,8 +46,6 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 ## Chapter 1: Stats Starts Here
 
-XX needs updating!
-
 ### Section 1.1: What is Statistics?
 ### Section 1.2: Data
 ### Section 1.3: Variables
