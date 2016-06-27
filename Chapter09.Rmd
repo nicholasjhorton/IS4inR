@@ -52,12 +52,13 @@ Note that some of the figures in this document may differ slightly from those in
 
 ### Section 9.2: Simulating by Hand
 
-Bwplot from page 257.
+Here is the box and whisker plot from page 257.
 
 ```{r}
-library(mosaic); library(readr)
-data <- c(5,4,7,5,18,6,5,4,6) 
-data$ID <- seq.int(nrow(data))
+library(mosaic)
+obs <- c(5,4,7,5,18,6,5,4,6) 
+ID <- 1:length(data)
+data <- data.frame(ID, obs)
 
-bwplot(~data, data=data)
+bwplot(~obs, data=data)
 ```
