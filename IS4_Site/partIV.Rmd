@@ -11,7 +11,7 @@
 
 Title  | PDF File URL
 ------------- | -------------
-Chapter 12 : From Randomness to Probability | https://www3.amherst.edu/~nhorton/is4/Chapter12.pdf
+Chapter 12 : From Randomness to Probability | There was not a significant use of R in chapter 12
 Chapter 13 : Probability Rules! | https://www3.amherst.edu/~nhorton/is4/Chapter13.pdf
 Chapter 14 : Random Variables and Probability Models | https://www3.amherst.edu/~nhorton/is4/Chapter14.pdf
 
@@ -22,6 +22,6 @@ Chapter 14 : Random Variables and Probability Models | https://www3.amherst.edu/
 
 Title  | Rmd File URL
 ------------- | -------------
-Chapter 12 : From Randomness to Probability | https://www3.amherst.edu/~nhorton/is4/Chapter12.Rmd
+Chapter 12 : From Randomness to Probability | There was not a significant use of R in chapter 12
 Chapter 13 : Probability Rules! | https://www3.amherst.edu/~nhorton/is4/Chapter13.Rmd
 Chapter 14 : Random Variables and Probability Models | https://www3.amherst.edu/~nhorton/is4/Chapter14.Rmd

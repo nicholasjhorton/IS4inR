@@ -2,6 +2,6 @@
 title: "Introduction"
 ---
 
-This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+These documents are intended to help describe how to undertake analyses introduced 
+as examples in the Fourth Edition of Intro Stats (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  

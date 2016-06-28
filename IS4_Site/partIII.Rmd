@@ -12,8 +12,8 @@
 Title  | PDF File URL
 ------------- | -------------
 Chapter 9 : Understanding Randomness | https://www3.amherst.edu/~nhorton/is4/Chapter9.pdf
-Chapter 10 : Sample Surveys | https://www3.amherst.edu/~nhorton/is4/Chapter10.pdf
-Chapter 11 : Experiments and Observational Studies | https://www3.amherst.edu/~nhorton/is4/Chapter11.pdf
+Chapter 10 : Sample Surveys | There was not a significant use of R in chapter 10
+Chapter 11 : Experiments and Observational Studies | There was not a significant use of R in chapter 11
 
 </br>
 <h4><right>.Rmd Files</right></h4>
@@ -22,5 +22,5 @@ Chapter 11 : Experiments and Observational Studies | https://www3.amherst.edu/~n
 Title  | Rmd File URL
 ------------- | -------------
 Chapter 9 : Understanding Randomness | https://www3.amherst.edu/~nhorton/is4/Chapter9.Rmd
-Chapter 10 : Sample Surveys | https://www3.amherst.edu/~nhorton/is4/Chapter10.Rmd
-Chapter 11 : Experiments and Observational Studies | https://www3.amherst.edu/~nhorton/is4/Chapter11.Rmd
+Chapter 10 : Sample Surveys | There was not a significant use of R in chapter 10
+Chapter 11 : Experiments and Observational Studies | There was not a significant use of R in chapter 11

@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Regression Wisdom (Chapter 8)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 10, 2016"
+date: "June 27, 2016"
 output: 
   pdf_document:
     fig_height: 4
@@ -105,8 +105,27 @@ xyplot(calories ~ sugars, group=shelfgrp, auto.key=TRUE,
 
 ### Section 8.2: Extrapolation and reaching beyond the data
 
+The `plot` function from base R will give a line graph if it's type is specified as "b" for both points and lines. `?help` will give the full list of types of graphs `plot` can generate. Below is figure 8.8 on page 219.
+
+```{r}
+Oil <- read_csv("http://www3.amherst.edu/~nhorton/sdm4/data/Historical_Oil_Prices_2014.csv")
+Oil <- Oil[1:42,]
+plot(Oil$`Nominal Price(EIA)` ~ Oil$`Years since 1970`, type = "b", col = "red", ylab = "Price (2005 $)", xlab = "Years Since 1970")
+lines(Oil$`AE098 Forecast in 2014$`, type = "o", col = "green")
+lines(Oil$`AE099 Forecast in 2014$`, type = "o", col = "blue")
+```
+
+
 ### Section 8.3: Outliers, leverage, and influence
 
-### Section 8.4: Lurking variables and causation
+To get the two regression lines shown by figure 8.10 on page 222 the `filter` function is used to create a dataset without the Palm Beach measurement. The `abline` function and `lm` functions together will add the regression lines.
 
-### Section 8.5: Working with summary values
+```{r}
+Election2000 <- read_csv("http://www3.amherst.edu/~nhorton/sdm4/data/Election_2000.csv")
+Election2000_2 <- filter(Election2000, Buchanan < 2000)
+
+plot(Buchanan ~ Nader, data=Election2000)
+abline(lm(Buchanan ~ Nader, data = Election2000), col = "blue")
+abline(lm(Buchanan ~ Nader, data = Election2000_2), col = "red")
+```
+
