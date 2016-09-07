@@ -20,5 +20,5 @@ Chapter 25* : Multiple Regression | https://www3.amherst.edu/~nhorton/is4/Chapte
 
 Title  | Rmd File URL
 ------------- | -------------
-Chapter 24* : Analysis of Variance | https://www3.amherst.edu/~nhorton/is4/Chapter24.pdf
-Chapter 25* : Multiple Regression | https://www3.amherst.edu/~nhorton/is4/Chapter25.pdf
+Chapter 24* : Analysis of Variance | https://www3.amherst.edu/~nhorton/is4/Chapter24.Rmd
+Chapter 25* : Multiple Regression | https://www3.amherst.edu/~nhorton/is4/Chapter25.Rmd
