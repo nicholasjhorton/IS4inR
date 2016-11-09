@@ -6,21 +6,11 @@
 
 
 </br>
-<h4><right>.PDF Files</right></h4>
+<h4><right>Chapters 09-11</right></h4>
 </br>
 
-Title  | PDF File URL
+Title  | Links to Rmd and PDF files
 ------------- | -------------
-Chapter 9 : Understanding Randomness | There was not a significant use of R in chapter 9
-Chapter 10 : Sample Surveys | There was not a significant use of R in chapter 10
-Chapter 11 : Experiments and Observational Studies | There was not a significant use of R in chapter 11
-
-</br>
-<h4><right>.Rmd Files</right></h4>
-</br>
-
-Title  | Rmd File URL
-------------- | -------------
-Chapter 9 : Understanding Randomness | There was not a significant use of R in chapter 9
+Chapter 9 : Understanding Randomness | <a href='files/Chapter09.Rmd'>.Rmd File</a> <a href='files/Chapter09.pdf'>(pdf)</a>
 Chapter 10 : Sample Surveys | There was not a significant use of R in chapter 10
 Chapter 11 : Experiments and Observational Studies | There was not a significant use of R in chapter 11

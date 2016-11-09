@@ -6,24 +6,12 @@
 
 
 </br>
-<h4><right>.PDF Files</right></h4>
+<h4><right>Chapters 20-23</right></h4>
 </br>
 
-Title  | PDF File URL
+Title  | Links to Rmd and PDF files
 ------------- | -------------
-Chapter 20 : Comparing Groups | https://www3.amherst.edu/~nhorton/is4/Chapter20.pdf
-Chapter 21 : Paired Samples and Blocks | https://www3.amherst.edu/~nhorton/is4/Chapter21.pdf
-Chapter 22 : Comparing Counts | https://www3.amherst.edu/~nhorton/is4/Chapter22.pdf
-Chapter 23 : Inferences for Regression | https://www3.amherst.edu/~nhorton/is4/Chapter23.pdf
-
-
-</br>
-<h4><right>.Rmd Files</right></h4>
-</br>
-
-Title  | Rmd File URL
-------------- | -------------
-Chapter 20 : Comparing Groups | https://www3.amherst.edu/~nhorton/is4/Chapter20.Rmd
-Chapter 21 : Paired Samples and Blocks | https://www3.amherst.edu/~nhorton/is4/Chapter21.Rmd
-Chapter 22 : Comparing Counts | https://www3.amherst.edu/~nhorton/is4/Chapter22.Rmd
-Chapter 23 : Inferences for Regression | https://www3.amherst.edu/~nhorton/is4/Chapter23.Rmd
+Chapter 20 : Comparing Groups | <a href='files/Chapter20.Rmd'>.Rmd File</a> <a href='files/Chapter20.pdf'>(pdf)</a>
+Chapter 21 : Paired Samples and Blocks | <a href='files/Chapter21.Rmd'>.Rmd File</a> <a href='files/Chapter21.pdf'>(pdf)</a>
+Chapter 22 : Comparing Counts | <a href='files/Chapter22.Rmd'>.Rmd File</a> <a href='files/Chapter22.pdf'>(pdf)</a>
+Chapter 23 : Inferences for Regression | <a href='files/Chapter23.Rmd'>.Rmd File</a> <a href='files/Chapter23.pdf'>(pdf)</a>
