@@ -17,3 +17,4 @@ Chapter 03 : Displaying and Summarizing Quantitative Data | <a href='files/Chapt
 Chapter 04 : Understanding and Comparing Distributions | <a href='files/Chapter04.Rmd'>.Rmd File</a> <a href='files/Chapter04.pdf'>(pdf)</a>
 Chapter 05 : The Standard Devitation as a Ruler and the Normal Model | <a href='files/Chapter05.Rmd'>.Rmd File</a> <a href='files/Chapter05.pdf'>(pdf)</a>
 
+
