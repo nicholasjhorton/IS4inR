@@ -1,10 +1,10 @@
 ---
-title: "IS4 in R: Scatterplots, Association, and Correlation (Chapter 6)"
+title: "IS4 in R: Understanding and Comparing Distributions (Chapter 4)"
 author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
-    fig_height: 4
+    fig_height: 3.3
     fig_width: 6
   html_document:
     fig_height: 3
@@ -13,9 +13,9 @@ output:
     fig_height: 4
     fig_width: 6
 ---
-  
-  
-  ```{r, include=FALSE}
+
+
+```{r, include=FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
@@ -31,73 +31,77 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small",   # slightly smaller font for code
+  size= "small",    # slightly smaller font for code
   fig.align="center"
 )
 ```
 
-## Introduction and background 
+## Introduction and Background 
 
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
-More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
-file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
-
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
-## Chapter 6: Scatterplots, Association, and Correlation
+## Chapter 4: Understanding and Comparing Distributions
 
-### Section 6.1: Scatterplots
+### Section 4.1: Comparing Groups with Histograms
 
-Figure 6.1 (page 150) displays the scatterplot of the average tracking error over time.
+See Figure 4.1 on page 83.
 
 ```{r}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
-Hurricanes <- 
-  read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Tracking_hurricanes_2012.csv")
-gf_point(Error72h ~ Year, data=Hurricanes, col="red") %>%
-  gf_labs(y="Prediction error (nautical miles)")
+Hopkins <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Hopkins_Forest_2011.txt", delim="\t")
+names(Hopkins)   
+gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=Hopkins, fill="coral1", color=TRUE) %>%
+  gf_labs(x="Average wind speed (mph)")
+   
 ```
 
-
-### Section 6.2: Correlation
-
-Figure 6.2 (page 153) displays the scatterplot of weight vs. height for a sample of students from statistics classes.
+Here we reproduce Figure 4.2 on page 83.
 
 ```{r}
-HtWt <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Heights_and_Weights.csv")
-gf_point(Weight ~ Height, data=HtWt, col="steelblue2") %>%
-  gf_labs(x="Height (in)", y="Weight (lbs)")
-cor(Weight ~ Height, data=HtWt)
+Hopkins <- mutate(Hopkins,
+  Summer = Month >= 4 & Month <= 9,
+  Winter = !Summer
+)
+gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Summer==TRUE), fill="blue2",color=TRUE) %>%
+  gf_labs(x="Average summer wind speed (mph)")
+df_stats(~AvgWindSpeed, data=filter(Hopkins, Summer==TRUE))
+gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Winter==TRUE),fill="darkolivegreen3", color=TRUE) %>%
+  gf_labs(x= "Average winter wind speed (mph)")
+df_stats(~ AvgWindSpeed, data=filter(Hopkins, Winter==TRUE))
 ```
 
-#### Kendall's Tau and Spearman's Rho
+### Section 4.2: Comparing Groups with Boxplots
+
+Here we reproduce Figure 4.3 on page 85.
 
 ```{r}
-cor(Weight ~ Height, method="kendall", data=HtWt)
-cor(Weight ~ Height, method="spearman", data=HtWt)
+gf_boxplot(AvgWindSpeed ~ as.factor(Month), data=Hopkins, fill="lightsalmon")
 ```
 
-### Section 6.3: Warning: Correlation does not always equal Causation
+### Section 4.3: Outliers
 
-### Section 6.4: Straightening scatterplots
-
-Since the dataset is so small for Figure 6.10 (page 161) we can enter it by hand.
 ```{r}
-fstop <- c(2.8, 4, 5.6, 8, 11, 16, 22, 32)
-shutter <- c(1/1000, 1/500, 1/250, 1/125, 1/60, 1/30, 1/15, 1/8)
-lenses <- data.frame(fstop, shutter)
-gf_point(fstop ~ shutter, data=lenses, col="darkred") %>%
-  gf_labs(y = "f/stop", x = "Shutter Speed (sec)")
+filter(Hopkins, Month==2, AvgWindSpeed > 6)   # in February
+filter(Hopkins, Month==6, AvgWindSpeed > 3.9) # in June
 ```
 
-A new transformed variable can be added using the `mutate` function.
+### Section 4.4: Timeplots: Order, Please!
+
+See Figures 4.4 through 4.6 starting on page 90.
 ```{r}
-lenses <- mutate(lenses, fstopsq = fstop*fstop)
-gf_point(fstopsq ~ shutter, data=lenses, col="firebrick3") %>%
-  gf_labs(y = "f/stop (squared)", x="Shutter Speed (sec)")
+gf_point(AvgWindSpeed ~ DayofYear, data=Hopkins, color = "mediumpurple") 
+gf_point(AvgWindSpeed ~ DayofYear, data=Hopkins, alpha=0) %>%
+  gf_line(col="navy")
+gf_point(AvgWindSpeed ~ DayofYear,data=Hopkins) %>%
+  gf_smooth()
 ```
+
+
+
