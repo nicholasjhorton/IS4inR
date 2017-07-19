@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Stats Starts Here (Chapter 1)"
-author: "Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017 "
 output: 
   pdf_document:
