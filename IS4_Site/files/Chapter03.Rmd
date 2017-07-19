@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
@@ -70,7 +71,7 @@ gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsu
 
 Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
 
-```{r fig.align="center"}
+```{r}
 Pulse_rates <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Pulse_rates.txt",
   delim="\t")
 with(Pulse_rates, stem(Pulse))
@@ -90,7 +91,7 @@ with(Pulse_rates, stem(Pulse, scale=2))
 
 See calculation and Figure 3.11 on page 51.
 
-```{r fig.align="center"}
+```{r}
 recent <- filter(Tsunami, Year >= 1989, Year <= 2013)
 nrow(recent)   
 median(~ Magnitude, data=recent)
@@ -112,7 +113,7 @@ IQR(~ Magnitude, data=recent)
 ### Section 3.5: Boxplots and 5-Number Summaries
 
 See display on page 55.
-```{r fig.align="center"}
+```{r}
 gf_boxplot(Magnitude ~ 1, data=recent)
 ```
 
