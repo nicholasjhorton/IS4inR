@@ -58,8 +58,9 @@ library(mosaic); library(readr)
 options(digits=3)
 BK <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Burger_King_Items.csv")
 names(BK) 
-gf_point(Fat ~ Protein, ylab="Fat (gm)", xlab="Protein (gm)", data=BK) %>%
-  gf_lm()
+gf_point(Fat ~ Protein, data=BK) %>%
+  gf_lm() %>%
+  gf_labs(y="Fat (gm)", x="Protein (gm)")
 ```
 
 We can calculate the residual for a particular value with 31 grams of protein.
