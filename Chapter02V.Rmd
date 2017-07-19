@@ -1,0 +1,86 @@
+---
+title: "IS4 in R: Displaying and Describing Catergorical Data (Chapter 2)"
+author: "Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
+output: 
+  pdf_document:
+    fig_height: 4
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 4
+    fig_width: 6
+---
+
+
+```{r, include=FALSE}
+# Don't delete this chunk if you are using the mosaic package
+# This loads the mosaic and dplyr packages
+require(mosaic)
+```
+
+```{r, include=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+
+# knitr settings to control how R chunks work.
+require(knitr)
+opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small"    # slightly smaller font for code
+)
+```
+
+## Introduction and Background 
+
+This document is intended to help describe how to undertake analyses introduced 
+as examples in the Fourth Edition of \emph{Intro Stats} (2014) by De Veaux, Velleman, and Bock.
+More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
+file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).  A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
+
+## Chapter 2: Displaying and Describing Categorical Data
+
+### Section 2.1: Summarizing and Displaying a Single Categorical Variable
+
+See displays on page 19-20.
+\vspace{12pt}
+```{r}
+library(mosaic); library(readr); library(ggformula)
+options(digits=3)
+Titanic <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Titanic.txt", delim="\t")
+tally(~ Class, data=Titanic)
+tally(~ Class, format="percent", data=Titanic)
+```
+\newpage
+```{r fig.align="center"}
+gf_bar(~Class, data=Titanic, stat="count",fill="aquamarine3")
+```
+
+### Section 2.2: Exploring the Relationship Between Two Categorical Variables
+
+See display on page 21.
+\vspace{12pt}
+```{r}
+tally(~ Survived + Class, margin=TRUE, data=Titanic)
+tally(~ Survived | Class, format="percent", data=Titanic)
+```
+
+See display on page 24.
+\newpage
+```{r fig.align="center"}
+gf_bar( ~ Class, fill= ~Survived, data=Titanic, position = position_dodge(),
+        main = "")
+```
+\vspace{12pt}
+```{r fig.align="center"}
+mosaicplot(tally(~ Survived + Class, data=Titanic),
+main="Mosaic plot of Class by Survival", 
+col= c("lightskyblue","lightslateblue","lightskyblue3", "lightseagreen"))
+```
+
