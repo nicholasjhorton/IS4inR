@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Displaying and Summarizing Quantitative Data (Chapter 3)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -55,18 +55,20 @@ See Figure 3.1 on page 44.
 ```{r message=FALSE}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
-Tsunami <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Tsunami_Earthquakes.txt", 
-  delim="\t")
+Tsunami <- 
+  read_delim("https://nhorton.people.amherst.edu/sdm4/data/Tsunami_Earthquakes.txt",   delim="\t")
 ```
 ```{r} 
 nrow(Tsunami)
 ```
 
 
-```{r fig.align="center"}
-gf_histogram(~ Magnitude, binwidth=0.5, center=0.5/2, type="count", data=Tsunami,fill="orange")
-gf_histogram(~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsunami,fill="indianred2")
-gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsunami,fill="lightblue3")
+```{r}
+gf_histogram(~ Magnitude, binwidth=0.5, center=0.5/2, data=Tsunami,fill="orange", col=TRUE) %>%
+  gf_labs(y="Count")
+#gf_histogram(..percent..~ Magnitude, binwidth=0.5, center=0.5/2+0.001, #type="percent",data=Tsunami,fill="indianred2",col=TRUE)
+gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsunami,fill="lightblue3", col=TRUE) %>%
+  gf_labs(y="Density")
 ```
 
 Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
@@ -95,7 +97,9 @@ See calculation and Figure 3.11 on page 51.
 recent <- filter(Tsunami, Year >= 1989, Year <= 2013)
 nrow(recent)   
 median(~ Magnitude, data=recent)
-gf_histogram(~ Magnitude, binwidth=0.2, data=recent, fill="cornflowerblue")
+gf_histogram(..density..~ Magnitude, binwidth=0.2, data=recent, 
+             fill="cornflowerblue", col=TRUE) %>%
+  gf_labs(y="Density")
 ```
 
 
@@ -114,7 +118,9 @@ IQR(~ Magnitude, data=recent)
 
 See display on page 55.
 ```{r}
-gf_boxplot(Magnitude ~ 1, data=recent)
+gf_boxplot(Magnitude ~ 1, data=recent) %>%
+  gf_theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) %>% 
+  gf_labs(x = "")
 ```
 
 Note that boxplots of a single distribution aren't usually very interesting (more useful displays will be seen in Chapter 4 when we start comparing groups).
