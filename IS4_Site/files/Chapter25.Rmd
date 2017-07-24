@@ -1,7 +1,7 @@
 ---
 title: "Multiple Regression (Chapter 25)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 24, 2016"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -42,7 +43,7 @@ as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Vell
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -56,7 +57,7 @@ The table on page 743 displays the results from the multiple regression model.
 ```{r}
 library(mosaic); library(readr)
 options(digits=3)
-BodyFat <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Body_fat_complete.csv")
+BodyFat <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Body_fat_complete.csv")
 BodyFatmod <- lm(PctBF ~ waist + Height, data=BodyFat)
 msummary(BodyFatmod)
 ```
@@ -66,13 +67,14 @@ msummary(BodyFatmod)
 Figure 25.1 on page 744 displays the scatterplot of percent body fat against height.
 
 ```{r}
-xyplot(PctBF ~ Height, data=BodyFat)
+gf_point(PctBF ~ Height, data=BodyFat) 
 ```
 
 Figure 25.2 (page 745) displays the scatterplot for a subset of the data (men with waist sizes between 36 and 38 inches).
 
 ```{r}
-xyplot(PctBF ~ Height, type=c("p", "r"), data=filter(BodyFat, waist > 36, waist < 38))
+gf_point(PctBF ~ Height, data=filter(BodyFat, waist > 36, waist < 38)) %>%
+  gf_lm()
 ```
 
 Figure 25.3 (page 745) displays the partial regression plot for weight.
@@ -81,8 +83,9 @@ Figure 25.3 (page 745) displays the partial regression plot for weight.
 BodyFatwaist <- lm(PctBF ~ waist, data=BodyFat)
 BodyFatheight <- lm(Height ~ waist, data=BodyFat)
 
-xyplot(resid(BodyFatwaist) ~ resid(BodyFatheight), 
-       ylab="% body fat residuals", xlab="Height residuals (in.)", type=c("p", "r"))
+gf_point(resid(BodyFatwaist) ~ resid(BodyFatheight)) %>%
+  gf_lm() %>%
+  gf_labs(y="% body fat residuals", x= "Height residuals (in.)")
 ```
 
 ### Section 25.3: The Multiple Regression Model 
@@ -90,15 +93,24 @@ xyplot(resid(BodyFatwaist) ~ resid(BodyFatheight),
 Figure 25.4 (page 747) displays scatterplots of residuals vs. height and waist, respectively.
 
 ```{r}
-xyplot(resid(BodyFatmod) ~ Height, type=c("p", "r"), data=BodyFat)
-xyplot(resid(BodyFatmod) ~ waist, type=c("p", "r"), data=BodyFat)
+gf_point(resid(BodyFatmod) ~ Height, data=BodyFat) %>% 
+  gf_lm()
+gf_point(resid(BodyFatmod) ~ waist,data=BodyFat) %>%
+  gf_lm()
 ```
 
 Figure 25.5 (page 747) displays histogram and qq plot of the residuals.
 
 ```{r}
-histogram(~ resid(BodyFatmod), fit="normal", width=7.5/5)
-qqmath(~ resid(BodyFatmod))
+m <- min(resid(BodyFatmod))
+ma <- max(resid(BodyFatmod))
+
+#gf_histogram(..density..~ resid(BodyFatmod), binwidth = 7.5/5, fill="lightsteelblue3", alpha=0.8) %>%
+  gf_function(fun = dnorm, xlim = c(m,ma) ,
+              color="red")
+
+gf_qq(~ resid(BodyFatmod), alpha=0.8, col="royalblue2") %>%
+  gf_labs(x="qnorm", y="resid(BodyFatmod)")
 ```
 
  
@@ -106,8 +118,8 @@ qqmath(~ resid(BodyFatmod))
 
 Figure 25.6 (page 754) displays the scatterplot matrix infant mortality data.  
 
-```{r, fig.height=6}
-InfantMortality <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Infant_Mortality.csv")
+```{r, message=FALSE, fig.height=6}
+InfantMortality <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Infant_Mortality.csv")
 splom(select(InfantMortality, -State))
 ```
 
