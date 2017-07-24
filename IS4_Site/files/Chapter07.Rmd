@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Linear Regression (Chapter 7)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -53,10 +53,12 @@ Note that some of the figures in this document may differ slightly from those in
 
 Figure 7.2 (page 179) displays a scatterplot of the Burger King data with a superimposed regression line.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr)
 options(digits=3)
-BK <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Burger_King_Items.csv")
+BK <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Burger_King_Items.csv")
+```
+```{r}
 names(BK) 
 gf_point(Fat ~ Protein, data=BK) %>%
   gf_lm() %>%
