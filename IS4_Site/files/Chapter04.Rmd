@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Understanding and Comparing Distributions (Chapter 4)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -52,14 +52,15 @@ Note that some of the figures in this document may differ slightly from those in
 
 See Figure 4.1 on page 83.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
 Hopkins <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Hopkins_Forest_2011.txt", delim="\t")
+```
+```{r}
 names(Hopkins)   
-gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=Hopkins, fill="coral1", color=TRUE) %>%
-  gf_labs(x="Average wind speed (mph)")
-   
+gf_histogram(..density..~ AvgWindSpeed, binwidth=0.5, center=0.24, data=Hopkins, fill="coral1", color=TRUE) %>%
+  gf_labs(x="Average wind speed (mph)", y="Density")
 ```
 
 Here we reproduce Figure 4.2 on page 83.
@@ -69,11 +70,11 @@ Hopkins <- mutate(Hopkins,
   Summer = Month >= 4 & Month <= 9,
   Winter = !Summer
 )
-gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Summer==TRUE), fill="blue2",color=TRUE) %>%
-  gf_labs(x="Average summer wind speed (mph)")
+gf_histogram(..density..~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Summer==TRUE), fill="blue2",color=TRUE) %>%
+  gf_labs(x="Average summer wind speed (mph)",y="Density")
 df_stats(~AvgWindSpeed, data=filter(Hopkins, Summer==TRUE))
-gf_histogram(~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Winter==TRUE),fill="darkolivegreen3", color=TRUE) %>%
-  gf_labs(x= "Average winter wind speed (mph)")
+gf_histogram(..density..~ AvgWindSpeed, binwidth=0.5, center=0.24, data=filter(Hopkins, Winter==TRUE),fill="darkolivegreen3", color=TRUE) %>%
+  gf_labs(x= "Average winter wind speed (mph)",y="Density")
 df_stats(~ AvgWindSpeed, data=filter(Hopkins, Winter==TRUE))
 ```
 
@@ -82,7 +83,8 @@ df_stats(~ AvgWindSpeed, data=filter(Hopkins, Winter==TRUE))
 Here we reproduce Figure 4.3 on page 85.
 
 ```{r}
-gf_boxplot(AvgWindSpeed ~ as.factor(Month), data=Hopkins, fill="lightsalmon")
+gf_boxplot(AvgWindSpeed ~ as.factor(Month), data=Hopkins, col="royalblue3") %>%
+  gf_labs(x="Month")
 ```
 
 ### Section 4.3: Outliers
@@ -100,7 +102,7 @@ gf_point(AvgWindSpeed ~ DayofYear, data=Hopkins, color = "mediumpurple")
 gf_point(AvgWindSpeed ~ DayofYear, data=Hopkins, alpha=0) %>%
   gf_line(col="navy")
 gf_point(AvgWindSpeed ~ DayofYear,data=Hopkins) %>%
-  gf_smooth()
+  gf_smooth(se=FALSE)
 ```
 
 
