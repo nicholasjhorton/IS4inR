@@ -1,7 +1,7 @@
 ---
 title: "Comparing Counts (Chapter 22)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 17, 2016"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -42,7 +43,7 @@ as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Vell
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -75,7 +76,7 @@ chi-square statistic.
 
 ```{r}
 chisq <- sum((ballplayer-expect)^2/expect); chisq
-1-xpchisq(chisq, df=11)
+1-xpchisq(chisq, df=11,col="slateblue2")
 ```
 
 ### Section 22.2: Chi-square test of homogeneity
@@ -94,8 +95,8 @@ area <- c(rep("agriculture", 209), rep("arts/science", 198),
 activity <- c(rep("Employed", 685), rep("Grad school", 466), 
               rep("Other", 305))
 tally(~ activity + area, margins=TRUE)
-mosaicplot(tally(~ activity + area), main="mosaicplot of activity by area",
-  color=TRUE)
+mosaicplot(tally(~ activity + area), main="Mosaicplot of Activity by area",
+  color=c("red","orange","tan2","yellow"),ylab="Area",xlab="Activity")
 xchisq.test(tally(~ activity + area))
 ```
 
