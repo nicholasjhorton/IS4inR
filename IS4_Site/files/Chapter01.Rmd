@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Stats Starts Here (Chapter 1)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017 "
 output: 
   pdf_document:
@@ -26,6 +26,7 @@ require(mosaic)
 
 # This changes the default colors in lattice plots.
 trellis.par.set(theme=theme.mosaic())  
+
 
 # knitr settings to control how R chunks work.
 require(knitr)
@@ -53,11 +54,14 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 See table on page 7.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr)
 options(digits=3)
-Tour <- read.delim("http://www.amherst.edu/~nhorton/sdm4/data/Tour_de_France_2014.txt", 
+Tour <- read.delim("https://nhorton.people.amherst.edu/sdm4/data/Tour_de_France_2014.txt",
     sep="\t", stringsAsFactors=FALSE)
+```
+
+```{r}
 names(Tour)
 dim(Tour)
 head(Tour, 3)
