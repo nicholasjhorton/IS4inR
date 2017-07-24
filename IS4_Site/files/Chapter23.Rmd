@@ -1,7 +1,7 @@
 ---
 title: "Inferences for Regression (Chapter 23)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 17, 2016"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -42,7 +43,7 @@ as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Vell
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -50,9 +51,11 @@ Note that some of the figures in this document may differ slightly from those in
 
 ### Section 23.1: The population and the sample
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr)
-BodyFat <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Body_fat_complete.csv")
+BodyFat <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Body_fat_complete.csv")
+```
+```{r}
 dim(BodyFat)
 glimpse(BodyFat)
 ```
@@ -74,18 +77,28 @@ confint(BodyFatmod)    # see page 755
 ```
 
 ```{r}
-# Figure 23.4 
-xyplot(PctBF ~ waist, xlab="Waist (in.)", 
-       type=c("p", "r", "smooth"), data=BodyFat)
+# Figure 23.4
+gf_point(PctBF ~ waist,data=BodyFat,alpha=0.7) %>%
+  gf_labs(x="Waist (in.)") %>%
+  gf_lm() %>%
+  gf_smooth(col="red", se=FALSE)
+
 # Figure 23.5
-xyplot(resid(BodyFatmod) ~ waist, xlab="Waist (in.)", 
-       type=c("p", "r", "smooth"), data=BodyFat)   
+gf_point(resid(BodyFatmod) ~ waist,data=BodyFat) %>%
+  gf_labs(x="Waist (in.)") %>%
+  gf_lm() %>%
+  gf_smooth(col="red")
+  
 # equiv of Figure 23.6   note that Figure 23.6 refers to the diamonds dataset
-xyplot(resid(BodyFatmod) ~ fitted(BodyFatmod), xlab="Predicted values", 
-       ylab="Residuals",
-       type=c("p", "r", "smooth"), data=BodyFat)
+gf_point(resid(BodyFatmod) ~ fitted(BodyFatmod),data=BodyFat) %>%
+  gf_labs(x="Predicted values", y="Residuals") %>%
+  gf_lm() %>%
+  gf_smooth(col="red")
+
 # Figure on bottom of page 650
-xqqmath(~ resid(BodyFatmod))
+gf_qq(~ resid(BodyFatmod), col="royalblue2", alpha=0.7) %>%
+  gf_qqline() %>%
+  gf_labs(x = "qnorm", y="resid(BodyFatmod)")
 ```
 
 
@@ -94,18 +107,22 @@ xqqmath(~ resid(BodyFatmod))
 We can reproduce Figure 23.12 (page 662) using the `panel.lmbands()` function.
 
 ```{r}
+#gf_point(PctBF ~ waist,data=BodyFat, col="springgreen3") %>%
+ # gf_labs(x="Waist(in.)") %>%
+
 xyplot(PctBF ~ waist, xlab="Waist (in.)", 
        panel=panel.lmbands, lwd=2, cex=0.2, data=BodyFat)
+
 ```
 
 ```{r}
-Craters <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Craters.csv")
+Craters <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Craters.csv")
 dim(Craters)
 Craters <- mutate(Craters,
                   logDiam = log(Diam.km.),
                   logAge = log(age..Ma.))
 Cratermod <- lm(logDiam ~ logAge, data=Craters)
-favstats(~ logAge, data=Craters)   # note example in book has n=39
+df_stats(~ logAge, data=Craters) # note example in book has n=39
 ```
 
 ```{r}
@@ -119,16 +136,17 @@ head(intpred, 3)
 #### Section 23.7: Logistic regression
 
 The Pima Indian dataset example is given on pages 663-667.
-```{r}
-Pima <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Pima_Indians_Diabetes.csv")
+```{r message=FALSE}
+Pima <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Pima_Indians_Diabetes.csv")
 Diabetes <- filter(Pima, BMI>0)  # get rid of missing values for BMI
-bwplot(BMI ~ as.factor(Diabetes), data=Pima)
+gf_boxplot(BMI ~ as.factor(Diabetes), col = c("navy", "red"), data=Pima) %>%
+  gf_labs(x="Diabetes")
 ```
 
 ```{r fig.keep="last"}
 pimamod <- glm(Diabetes ~ BMI, family="binomial", data=Pima)
 f2 <- makeFun(pimamod)
-xyplot(Diabetes ~ BMI, data=Pima)
-plotFun(f2, add=TRUE)
+gf_point(Diabetes ~ BMI, data=Pima, alpha=0.6, col="red") %>%
+  gf_fun(pimamod)
 msummary(pimamod)
 ```
