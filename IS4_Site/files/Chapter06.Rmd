@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Scatterplots, Association, and Correlation (Chapter 6)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -54,11 +54,13 @@ Note that some of the figures in this document may differ slightly from those in
 
 Figure 6.1 (page 150) displays the scatterplot of the average tracking error over time.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
 Hurricanes <- 
-  read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Tracking_hurricanes_2012.csv")
+  read_csv("https://nhorton.people.amherst.edu/sdm4/data/Tracking_hurricanes_2012.csv")
+```
+```{r}
 gf_point(Error72h ~ Year, data=Hurricanes, col="red") %>%
   gf_labs(y="Prediction error (nautical miles)")
 ```
@@ -68,10 +70,12 @@ gf_point(Error72h ~ Year, data=Hurricanes, col="red") %>%
 
 Figure 6.2 (page 153) displays the scatterplot of weight vs. height for a sample of students from statistics classes.
 
-```{r}
-HtWt <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Heights_and_Weights.csv")
+```{r message=FALSE}
+HtWt <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Heights_and_Weights.csv")
 gf_point(Weight ~ Height, data=HtWt, col="steelblue2") %>%
   gf_labs(x="Height (in)", y="Weight (lbs)")
+```
+```{r}
 cor(Weight ~ Height, data=HtWt)
 ```
 
