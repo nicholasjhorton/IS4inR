@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Displaying and Describing Catergorical Data (Chapter 2)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -50,10 +50,12 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 See displays on page 17.
 \vspace{12pt}
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
-Titanic <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Titanic.txt", delim="\t")
+Titanic <- read_delim("https://nhorton.people.amherst.edu/sdm4/data/Titanic.txt", delim="\t")
+```
+```{r}
 tally(~ Class, data=Titanic)
 tally(~ Class, format="percent", data=Titanic)
 ```
@@ -74,13 +76,11 @@ tally(~ Survived | Class, format="percent", data=Titanic)
 See display on page 22.
 \newpage
 ```{r fig.align="center"}
-gf_bar( ~ Class, fill= ~Survived, data=Titanic, position = position_dodge(),
-        main = "")
+gf_bar( ~ Class, fill= ~Survived, data=Titanic, position = position_dodge())
 ```
 \vspace{12pt}
 ```{r fig.align="center"}
 mosaicplot(tally(~ Survived + Class, data=Titanic),
-main="Mosaic plot of Class by Survival", 
-col= c("lightskyblue","lightslateblue","lightskyblue3", "lightseagreen"))
+           main="Mosaic plot of Class by Survival", col= c("lightskyblue","lightslateblue","lightskyblue3", "lightseagreen"))
 ```
 
