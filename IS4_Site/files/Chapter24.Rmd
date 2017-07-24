@@ -1,7 +1,7 @@
 ---
 title: "Analysis of Variance (Chapter 24)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 24, 2016"
+author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.algin="center"
 )
 ```
 
@@ -42,7 +43,7 @@ as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Vell
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -53,21 +54,21 @@ Note that some of the figures in this document may differ slightly from those in
 The graph in Figure 24.1 (page 701) can be generated using the `bwplot()` function.
 
 ```{r}
-Soap <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Bacterial_Soap.csv")
-bwplot(Bacterial.Counts ~ Method, data=Soap)
+Soap <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Bacterial_Soap.csv")
+gf_boxplot(Bacterial.Counts ~ Method, data=Soap, col="royalblue2")
 ```
 
 The example on page 704 considers the outcomes in hand volumes for three treatments
 post surgery.
 ```{r}
-Contrast <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Contrast_baths.csv")
-bwplot(Hand.Vol.Chg ~ Treatment, data=Contrast)
+Contrast <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Contrast_baths.csv")
+gf_boxplot(Hand.Vol.Chg ~ Treatment, data=Contrast, col="lightsteelblue4")
 ```
 
 The summary statistics at the bottom of page 705 can be calculated using `favstats()`.
 
 ```{r}
-favstats(Bacterial.Counts ~ Method, data=Soap)
+df_stats(Bacterial.Counts ~ Method, data=Soap)
 ```
 
 ### Section 24.2: The ANOVA table
@@ -114,6 +115,7 @@ msummary(lmmod)
 A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `bwplot()` function. Figure 24.6 is made using the `qqmath` function.
 
 ```{r}
-bwplot(resid(lmmod) ~ Method, data=Soap)
-qqmath(fitted(lmmod) ~ resid(lmmod))
+gf_boxplot(resid(lmmod) ~ Method, data=Soap)
+gf_qq(~ resid(lmmod), data=Soap, col="lightcoral") %>%
+  gf_labs(x="qnorm", y="resid(lmmod)")
 ```
