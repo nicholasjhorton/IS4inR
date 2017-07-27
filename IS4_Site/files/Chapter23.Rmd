@@ -104,15 +104,12 @@ gf_qq(~ resid(BodyFatmod), col="royalblue2", alpha=0.7) %>%
 
 #### Section 23.6: Confidence intervals for predicted values
 
-We can reproduce Figure 23.12 (page 662) using the `panel.lmbands()` function.
+We can reproduce Figure 23.12 (page 662) using the `gf_lm(interval = )` function.
 
 ```{r}
-#gf_point(PctBF ~ waist,data=BodyFat, col="springgreen3") %>%
- # gf_labs(x="Waist(in.)") %>%
-
-xyplot(PctBF ~ waist, xlab="Waist (in.)", 
-       panel=panel.lmbands, lwd=2, cex=0.2, data=BodyFat)
-
+gf_point(PctBF ~ waist, data=BodyFat, cex=0.5) %>%
+  gf_lm(interval = "prediction", col="blue", fill = "green") %>%
+  gf_lm(interval = "confidence", fill = "purple")
 ```
 
 ```{r}
