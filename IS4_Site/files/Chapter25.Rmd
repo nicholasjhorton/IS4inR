@@ -62,6 +62,15 @@ BodyFatmod <- lm(PctBF ~ waist + Height, data=BodyFat)
 msummary(BodyFatmod)
 ```
 
+We can use this model to generate predicted values.
+
+```{r}
+BodyFatfun <- makeFun(BodyFatmod)
+BodyFatfun(waist=0, Height=0)  # returns intercept
+BodyFatfun(waist=30, Height=70)  
+-3.101 + 1.773*30 -0.602*70
+```
+
 ### Section 25.2: What Multiple Regression Coefficients Mean
 
 Figure 25.1 on page 744 displays the scatterplot of percent body fat against height.
