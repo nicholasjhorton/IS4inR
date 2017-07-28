@@ -15,7 +15,7 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include=FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
@@ -89,7 +89,7 @@ gf_point(resid(BodyFatmod) ~ waist,data=BodyFat) %>%
   gf_lm() %>%
   gf_smooth(col="red")
   
-# equiv of Figure 23.6   note that Figure 23.6 refers to the diamonds dataset
+# equiv of Figure 23.6 note that Figure 23.6 refers to the diamonds dataset
 gf_point(resid(BodyFatmod) ~ fitted(BodyFatmod),data=BodyFat) %>%
   gf_labs(x="Predicted values", y="Residuals") %>%
   gf_lm() %>%
