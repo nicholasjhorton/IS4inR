@@ -66,16 +66,21 @@ nrow(Tsunami)
 ```{r}
 gf_histogram(~ Magnitude, binwidth=0.5, center=0.5/2, data=Tsunami,fill="orange", col=TRUE) %>%
   gf_labs(y="Count")
-#gf_histogram(..percent..~ Magnitude, binwidth=0.5, center=0.5/2+0.001, #type="percent",data=Tsunami,fill="indianred2",col=TRUE)
+
+gf_histogram((..count../sum(..count..)*100) ~ Magnitude, center=0.5/2, binwidth = 0.5, fill="red", col=TRUE, data=Tsunami) %>%
+  gf_labs(y="Percentage of Total")
+
 gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsunami,fill="lightblue3", col=TRUE) %>%
   gf_labs(y="Density")
 ```
 
 Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
 
-```{r}
+```{r message=FALSE}
 Pulse_rates <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Pulse_rates.txt",
   delim="\t")
+```
+```{r}
 with(Pulse_rates, stem(Pulse))
 gf_dotplot(~Pulse, data=Pulse_rates, fill="red")
 ```
