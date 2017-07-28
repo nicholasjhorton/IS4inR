@@ -54,7 +54,7 @@ Note that some of the figures in this document may differ slightly from those in
 
 The table on page 743 displays the results from the multiple regression model.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr)
 options(digits=3)
 BodyFat <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Body_fat_complete.csv")
@@ -111,12 +111,13 @@ gf_point(resid(BodyFatmod) ~ waist,data=BodyFat) %>%
 Figure 25.5 (page 747) displays histogram and qq plot of the residuals.
 
 ```{r}
-m <- min(resid(BodyFatmod))
-ma <- max(resid(BodyFatmod))
+res <- resid(BodyFatmod)
+me <- mean(res)
+std <- sd(res)
 
-#gf_histogram(..density..~ resid(BodyFatmod), binwidth = 7.5/5, fill="lightsteelblue3", alpha=0.8) %>%
-  gf_function(fun = dnorm, xlim = c(m,ma) ,
-              color="red")
+gf_histogram(..density..~resid(BodyFatmod), 
+             binwidth=7.5/5, fill="lightsteelblue3", apha=0.8, col=TRUE) %>%
+  gf_dist("norm", mean = me, sd = std, col="red")
 
 gf_qq(~ resid(BodyFatmod), alpha=0.8, col="royalblue2") %>%
   gf_labs(x="qnorm", y="resid(BodyFatmod)")
