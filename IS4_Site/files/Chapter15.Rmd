@@ -69,8 +69,11 @@ gf_histogram(~ samples, binwidth=0.005, center=0.01/2,col=TRUE, fill="darkseagre
 
 Let's replicate the display on page 407:
 
-```{r}
+```{r message=FALSE}
 BodyFat <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Body_fat_complete.csv")
+```
+
+```{r}
 medians <- do(2000)*median(~ Weight, data=sample(BodyFat, 10, replace=FALSE))
 gf_histogram(..density..~median, binwidth=5, center=5/2, data=medians, fill="mediumseagreen",color=TRUE) %>%
   gf_labs(x="Sampling distribution of medians",y="Density")
