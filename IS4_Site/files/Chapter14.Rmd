@@ -93,7 +93,7 @@ Let's replicate the Think/Show/Tell/Conclusion on pages 381 and 382:
 
 ```{r}
 sdval <- sqrt(4.50); sdval
-plotDist("norm", params=list(18, sdval), xlab="x", ylab="f(x)")
+gf_dist("norm", params=list(18, sdval), xlab="x", ylab="f(x)")
 xpnorm(20, mean=18, sd=sdval)  # note how exact value is different from the table!
 zval <- (20-18)/sdval; zval
 xpnorm(zval, mean=0, sd=1)    
