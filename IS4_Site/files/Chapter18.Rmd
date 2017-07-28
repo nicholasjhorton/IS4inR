@@ -64,8 +64,10 @@ xpnorm(c(mu-3*sd, mu-2*sd, mu-sd, mu+sd, mu+2*sd, mu+3*sd), mean=mu, sd=sd)
 Figure 18.1 (page 477) displays a normal curve (dashed green curve) and a t-model with 2 degrees of freedom (solid blue curve).
 
 ```{r fig.keep="last"}
-plotDist("norm", lty=2, col="green", lwd=2)
-plotDist("t", params=2, lty=1, lwd=2, col="blue", add=TRUE)
+gf_dist("norm", col="green", linetype="dashed")
+
+gf_dist("norm", col="green", linetype="dashed", xlim=c(-4,4)) %>%
+  gf_dist("t", params=2, col="blue", xlim=c(-4,4))
 ```
 
 We can reproduce the calculations for the Farmed salmon example (pages 479-480) using summary statistics:
@@ -78,8 +80,10 @@ ybar + c(-tstar, tstar)*s/sqrt(n)
 
 or directly:
 
-```{r}
+```{r message=FALSE}
 Salmon <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Farmed_Salmon.csv")
+```
+```{r}
 df_stats(~ Mirex, data=Salmon)
 gf_histogram(..density..~ Mirex, binwidth=0.01, center=0.01/2, data=Salmon,fill="royalblue2", col=TRUE) %>%
   gf_labs(y="Density")
