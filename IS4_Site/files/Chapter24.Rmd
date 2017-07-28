@@ -15,7 +15,7 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include=FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
@@ -53,14 +53,14 @@ Note that some of the figures in this document may differ slightly from those in
 
 The graph in Figure 24.1 (page 701) can be generated using the `bwplot()` function.
 
-```{r}
+```{r message = FALSE}
 Soap <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Bacterial_Soap.csv")
 gf_boxplot(Bacterial.Counts ~ Method, data=Soap, col="royalblue2")
 ```
 
 The example on page 704 considers the outcomes in hand volumes for three treatments
 post surgery.
-```{r}
+```{r message=FALSE}
 Contrast <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Contrast_baths.csv")
 gf_boxplot(Hand.Vol.Chg ~ Treatment, data=Contrast, col="lightsteelblue4")
 ```
