@@ -49,7 +49,7 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 ### Section 2.1: Summarizing and Displaying a Single Categorical Variable
 
 See displays on page 17.
-\vspace{12pt}
+
 ```{r message=FALSE}
 library(mosaic); library(readr); library(ggformula)
 options(digits=3)
@@ -59,7 +59,7 @@ Titanic <- read_delim("https://nhorton.people.amherst.edu/sdm4/data/Titanic.txt"
 tally(~ Class, data=Titanic)
 tally(~ Class, format="percent", data=Titanic)
 ```
-\newpage
+
 ```{r fig.align="center"}
 gf_bar(~Class, data=Titanic, stat="count",fill="aquamarine3")
 ```
@@ -67,18 +67,18 @@ gf_bar(~Class, data=Titanic, stat="count",fill="aquamarine3")
 ### Section 2.2: Exploring the Relationship Between Two Categorical Variables
 
 See display on page 19.
-\vspace{12pt}
+
 ```{r}
 tally(~ Survived + Class, margin=TRUE, data=Titanic)
 tally(~ Survived | Class, format="percent", data=Titanic)
 ```
 
 See display on page 22.
-\newpage
+
 ```{r fig.align="center"}
 gf_bar( ~ Class, fill= ~Survived, data=Titanic, position = position_dodge())
 ```
-\vspace{12pt}
+
 ```{r fig.align="center"}
 mosaicplot(tally(~ Survived + Class, data=Titanic),
            main="Mosaic plot of Class by Survival", col= c("lightskyblue","lightslateblue","lightskyblue3", "lightseagreen"))
