@@ -90,7 +90,7 @@ t <- (ybar1 - ybar2)/sediff; t
 pval <- 2*pt(t, df=7.62); pval
 ```
 
-```{r}
+```{r message=FALSE}
 prices <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Camera_prices.csv")
 prices
 with(prices, t.test(Buying.from.a.Friend, Buying.from.a.Stranger))
