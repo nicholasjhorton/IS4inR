@@ -1,6 +1,6 @@
 ---
 title: "IS4 in R: Displaying and Summarizing Quantitative Data (Chapter 3)"
-author: "Patrick Frenett, Vickie Ip and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
 date: "July 17, 2017"
 output: 
   pdf_document:
@@ -40,7 +40,7 @@ opts_chunk$set(
 
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
-More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
@@ -77,7 +77,7 @@ gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsu
 Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
 
 ```{r message=FALSE}
-Pulse_rates <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Pulse_rates.txt",
+Pulse_rates <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Pulse_rates.txt",
   delim="\t")
 ```
 ```{r}

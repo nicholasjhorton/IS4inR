@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -19,13 +19,12 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="site_libs/highlight/default.css"
-      type="text/css" />
-<script src="site_libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -152,7 +151,6 @@ $(document).ready(function () {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -242,9 +240,10 @@ $(document).ready(function () {
 
 
 <ul>
-<li>Stats: Data and Models in R (Horton) describes how to undertake analyses in De Veaux, Velleman, and Bock’s <em>Stats: Data and Models</em> (4th edition). These materials can be found at <a href="http://www.amherst.edu/~nhorton/sdm4" class="uri">http://www.amherst.edu/~nhorton/sdm4</a>.</li>
-<li>Introduction to the Practice of Statistics in R (NJ Horton and BS Baumer) describes how to undertake analyses in R that are introduced as examples in the first chapters of <em>Introduction to the Practice of Statistics</em> (6th edition), the excellent text by David Moore, George McCabe, and Bruce Craig. IPS in R can be found <a href="http://www.amherst.edu/~nhorton/ips6e">here</a></li>
-<li>The Statistical Sleuth in R (NJ Horton) describes how to undertake analyses in R for the examples in the first 13 chapters of the Third Edition of the <em>Statistical Sleuth: A Course in Methods of Data Analysis</em> (2013), by Fred Ramsey and Dan Schafer. The materials can be found <a href="http://www3.amherst.edu/~nhorton/sleuth/">here</a></li>
+<li>Stats: Data and Models in R (Horton) describes how to undertake analyses in De Veaux, Velleman, and Bock’s <em>Stats: Data and Models</em> (4th edition). These materials can be found at <a href="http://nhorton.people.amherst.edu/sdm4" class="uri">http://nhorton.people.amherst.edu/sdm4</a>.</li>
+<li>Introduction to the Practice of Statistics in R (NJ Horton and BS Baumer) describes how to undertake analyses in R that are introduced as examples in the first chapters of <em>Introduction to the Practice of Statistics</em> (6th edition), the excellent text by David Moore, George McCabe, and Bruce Craig. IPS in R can be found <a href="http://nhorton.people.amherst.edu/ips6e">here</a></li>
+<li>The Statistical Sleuth in R (NJ Horton) describes how to undertake analyses in R for the examples in the first 13 chapters of the Third Edition of the <em>Statistical Sleuth: A Course in Methods of Data Analysis</em> (2013), by Fred Ramsey and Dan Schafer. The materials can be found <a href="http://nhorton.people.amherst.edu/sleuth/">here</a></li>
+<li>Other resources are available at <a href="https://cran.r-project.org/web/packages/mosaic/vignettes/mosaic-resources.html" class="uri">https://cran.r-project.org/web/packages/mosaic/vignettes/mosaic-resources.html</a></li>
 </ul>
 
 
@@ -255,8 +254,11 @@ $(document).ready(function () {
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
 
 
@@ -267,7 +269,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

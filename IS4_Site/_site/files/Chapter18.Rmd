@@ -1,6 +1,6 @@
 ---
 title: "Inferences about Means (Chapter 18)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
 date: "June 16, 2016"
 output: 
   pdf_document:
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -40,9 +41,9 @@ opts_chunk$set(
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
-file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -63,8 +64,10 @@ xpnorm(c(mu-3*sd, mu-2*sd, mu-sd, mu+sd, mu+2*sd, mu+3*sd), mean=mu, sd=sd)
 Figure 18.1 (page 477) displays a normal curve (dashed green curve) and a t-model with 2 degrees of freedom (solid blue curve).
 
 ```{r fig.keep="last"}
-plotDist("norm", lty=2, col="green", lwd=2)
-plotDist("t", params=2, lty=1, lwd=2, col="blue", add=TRUE)
+gf_dist("norm", col="green", linetype="dashed")
+
+gf_dist("norm", col="green", linetype="dashed", xlim=c(-4,4)) %>%
+  gf_dist("t", params=2, col="blue", xlim=c(-4,4))
 ```
 
 We can reproduce the calculations for the Farmed salmon example (pages 479-480) using summary statistics:
@@ -77,10 +80,13 @@ ybar + c(-tstar, tstar)*s/sqrt(n)
 
 or directly:
 
+```{r message=FALSE}
+Salmon <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Farmed_Salmon.csv")
+```
 ```{r}
-Salmon <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Farmed_Salmon.csv")
-favstats(~ Mirex, data=Salmon)
-histogram(~ Mirex, width=0.01, center=0.01/2, data=Salmon)
+df_stats(~ Mirex, data=Salmon)
+gf_histogram(..density..~ Mirex, binwidth=0.01, center=0.01/2, data=Salmon,fill="royalblue2", col=TRUE) %>%
+  gf_labs(y="Density")
 t.test(~ Mirex, data=Salmon)
 ```
 

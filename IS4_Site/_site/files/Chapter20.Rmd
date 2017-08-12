@@ -1,7 +1,7 @@
 ---
 title: "Comparing Groups (Chapter 20)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 16, 2016"
+author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -40,9 +41,9 @@ opts_chunk$set(
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
-file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -89,8 +90,8 @@ t <- (ybar1 - ybar2)/sediff; t
 pval <- 2*pt(t, df=7.62); pval
 ```
 
-```{r}
-prices <- read.csv("http://www.amherst.edu/~nhorton/sdm4/data/Camera_prices.csv")
+```{r message=FALSE}
+prices <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Camera_prices.csv")
 prices
 with(prices, t.test(Buying.from.a.Friend, Buying.from.a.Stranger))
 ```
@@ -103,5 +104,6 @@ ds <- with(prices,
 ds
 t.test(price ~ group, data=ds)   # Unpooled
 t.test(price ~ group, var.equal=TRUE, data=ds)   # Pooled
-bwplot(group ~ price, data=ds)
+gf_boxplot(price ~ group, data=ds, col=c("seagreen3","steelblue2")) %>%
+  gf_labs(x="Group", y="Price")
 ```

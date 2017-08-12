@@ -1,11 +1,11 @@
 ---
 title: "IS4 in R: Displaying and Summarizing Quantitative Data (Chapter 3)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 6, 2016"
+author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
-    fig_height: 4
-    fig_width: 6
+    fig_height: 2.8
+    fig_width: 5
   html_document:
     fig_height: 3
     fig_width: 5
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
@@ -39,10 +40,9 @@ opts_chunk$set(
 
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
-More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
-file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -51,27 +51,41 @@ Note that some of the figures in this document may differ slightly from those in
 ### Section 3.1: Displaying Quantitative Variables
 
 See Figure 3.1 on page 44.
-```{r}
-library(mosaic); library(readr)
+
+```{r message=FALSE}
+library(mosaic); library(readr); library(ggformula)
 options(digits=3)
-Tsunami <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Tsunami_Earthquakes.txt", 
-  delim="\t")
-nrow(Tsunami)   
-histogram(~ Magnitude, width=0.5, center=0.5/2, type="count", data=Tsunami)
-histogram(~ Magnitude, width=0.5, center=0.5/2, type="percent", data=Tsunami)
-histogram(~ Magnitude, width=0.5, center=0.5/2, data=Tsunami)
+Tsunami <- 
+  read_delim("https://nhorton.people.amherst.edu/sdm4/data/Tsunami_Earthquakes.txt",   delim="\t")
+```
+```{r} 
+nrow(Tsunami)
 ```
 
-Note that Figure 3.3 on page 45 displays the second of these histograms (with the y-axis measured by percent in each bar).  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
 
 ```{r}
-Pulse_rates <- read_delim("http://www.amherst.edu/~nhorton/sdm4/data/Pulse_rates.txt",
-  delim="\t")
-with(Pulse_rates, stem(Pulse))
-dotPlot(~ Pulse, data=Pulse_rates)
+gf_histogram(~ Magnitude, binwidth=0.5, center=0.5/2, data=Tsunami,fill="orange", col=TRUE) %>%
+  gf_labs(y="Count")
+
+gf_histogram((..count../sum(..count..)*100) ~ Magnitude, center=0.5/2, binwidth = 0.5, fill="red", col=TRUE, data=Tsunami) %>%
+  gf_labs(y="Percentage of Total")
+
+gf_histogram(..density.. ~ Magnitude, binwidth=0.5, center=0.5/2+0.001, data=Tsunami,fill="lightblue3", col=TRUE) %>%
+  gf_labs(y="Density")
 ```
 
-Or on page 47
+Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
+
+```{r message=FALSE}
+Pulse_rates <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Pulse_rates.txt",
+  delim="\t")
+```
+```{r}
+with(Pulse_rates, stem(Pulse))
+gf_dotplot(~Pulse, data=Pulse_rates, fill="red")
+```
+
+Or on page 47.
 
 ```{r}
 with(Pulse_rates, stem(Pulse, scale=2))
@@ -85,19 +99,21 @@ with(Pulse_rates, stem(Pulse, scale=2))
 See calculation and Figure 3.11 on page 51.
 
 ```{r}
-recent <- filter(Tsunami, Year >= 1987, Year <= 2011)
+recent <- filter(Tsunami, Year >= 1989, Year <= 2013)
 nrow(recent)   
 median(~ Magnitude, data=recent)
-histogram(~Magnitude,data=recent,width=0.2)
+gf_histogram(..density..~ Magnitude, binwidth=0.2, data=recent, 
+             fill="cornflowerblue", col=TRUE) %>%
+  gf_labs(y="Density")
 ```
 
 
 ### Section 3.4: Spread
 
-See statistics reported on pages 52-53.
+See statistics reported on pages 54-55.
 
 ```{r}
-favstats(~ Magnitude, data=recent)
+df_stats(~ Magnitude, data=recent)
 range(~ Magnitude, data=recent)
 diff(range(~ Magnitude, data=recent))
 IQR(~ Magnitude, data=recent)
@@ -107,7 +123,9 @@ IQR(~ Magnitude, data=recent)
 
 See display on page 55.
 ```{r}
-bwplot(~ Magnitude, data=recent)
+gf_boxplot(Magnitude ~ 1, data=recent) %>%
+  gf_theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) %>% 
+  gf_labs(x = "")
 ```
 
 Note that boxplots of a single distribution aren't usually very interesting (more useful displays will be seen in Chapter 4 when we start comparing groups).
@@ -123,13 +141,13 @@ median(~ Magnitude, data=recent)
 
 ### Section 3.7: The Spread of Symmetric Distributions: The Standard Deviation
 
-To check the claim made on page 60
+To check the claim made on page 60.
 
 ```{r}
 sd(~ Magnitude, data=recent)
 var(~ Magnitude, data=recent)
 sqrt(var(~ Magnitude, data=recent))
-0.705^2
+0.702^2
 ```
 
 The standard deviation squared equals the variance.

@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Linear Regression (Chapter 7)"
-author: "Patrick Frenett and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 10, 2016"
+author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
+date: "July 17, 2017"
 output: 
   pdf_document:
     fig_height: 4
@@ -31,7 +31,8 @@ trellis.par.set(theme=theme.mosaic())
 require(knitr)
 opts_chunk$set(
   tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  size="small",    # slightly smaller font for code
+  fig.align="center"
 )
 ```
 
@@ -40,9 +41,9 @@ opts_chunk$set(
 This document is intended to help describe how to undertake analyses introduced 
 as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
-file as well as the associated R Markdown reproducible analysis source file used to create it can be found at http://www.amherst.edu/~nhorton/sdm4.
+file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
 
 Note that some of the figures in this document may differ slightly from those in the IS4 book due to small differences in datasets. However in all cases the analysis and techniques in R are accurate.
 
@@ -52,12 +53,16 @@ Note that some of the figures in this document may differ slightly from those in
 
 Figure 7.2 (page 179) displays a scatterplot of the Burger King data with a superimposed regression line.
 
-```{r}
+```{r message=FALSE}
 library(mosaic); library(readr)
 options(digits=3)
-BK <- read_csv("http://www.amherst.edu/~nhorton/sdm4/data/Burger_King_Items.csv")
-names(BK)  
-xyplot(Fat ~ Protein, ylab="Fat (gm)", xlab="Protein (gm)", type=c("p", "r"), data=BK)
+BK <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Burger_King_Items.csv")
+```
+```{r}
+names(BK) 
+gf_point(Fat ~ Protein, data=BK) %>%
+  gf_lm() %>%
+  gf_labs(y="Fat (gm)", x="Protein (gm)")
 ```
 
 We can calculate the residual for a particular value with 31 grams of protein.
@@ -95,7 +100,8 @@ Figure 7.5 (page 188) displays the scatterplot of residuals as a function of the
 
 The `summary` function generates a lot of output (much of which won't be familiar).
 ```{r}
-xyplot(resid(BKmod) ~ Protein, type=c("p", "r"), data=BK)
+gf_point(resid(BKmod) ~ Protein, data=BK) %>%
+  gf_lm()
 msummary(BKmod)
 ```
 
