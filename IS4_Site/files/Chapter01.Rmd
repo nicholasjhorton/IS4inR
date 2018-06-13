@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Stats Starts Here (Chapter 1)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017 "
+date: "June 13, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -55,10 +55,11 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 See table on page 7.
 
 ```{r message=FALSE}
-library(mosaic); library(readr)
+library(mosaic)
+library(readr)
 options(digits=3)
 Tour <- read.delim("https://nhorton.people.amherst.edu/sdm4/data/Tour_de_France_2014.txt",
-    sep="\t", stringsAsFactors=FALSE)
+    sep="\t", stringsAsFactors = FALSE)
 ```
 
 ```{r}
@@ -71,20 +72,20 @@ tail(Tour, 8)
 #### Let's find who was the winner in 1998
 
 ```{r}
-filter(Tour, Year==1998)
+filter(Tour, Year == 1998)
 ```
 
-#### How many stages did Alberto Contador win in the years when he won the Tour?
+#### How many stages were there the years Alberto Contador won the tour?
 
 ```{r}
-filter(Tour, Winner=="Contador Alberto")
+filter(Tour, Winner == "Contador Alberto")
 ```
 
 Note that the following commands generate the same output:
 
 ```{r}
 Tour %>%
-  filter(Winner=="Contador Alberto")
+  filter(Winner == "Contador Alberto")
 ```
 
 
@@ -92,12 +93,12 @@ The pipe operator ('%>%') can be used to connect one dataframe or command to ano
 
 #### What was the slowest average speed of any tour?  Fastest?
 ```{r}
-filter(Tour, Average.Speed==min(Average.Speed))
-filter(Tour, Average.Speed==max(Average.Speed))
+filter(Tour, Average.Speed == min(Average.Speed))
+filter(Tour, Average.Speed == max(Average.Speed))
 ```
 
 #### What can we say about the Average Speeds?
 
 ```{r}
-df_stats(~ Average.Speed, data=Tour)
+df_stats(~ Average.Speed, data = Tour)
 ```
