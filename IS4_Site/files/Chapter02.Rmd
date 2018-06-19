@@ -45,7 +45,7 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 See displays on page 17.
 
-```{r message=FALSE}
+```{r message = FALSE}
 library(mosaic) 
 library(readr) 
 library(ggformula)
