@@ -46,8 +46,8 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 See displays on page 17.
 
 ```{r message=FALSE}
-library(mosaic); 
-library(readr); 
+library(mosaic) 
+library(readr) 
 library(ggformula)
 options(digits = 3)
 Titanic <- read_delim("https://nhorton.people.amherst.edu/sdm4/data/Titanic.txt", 
