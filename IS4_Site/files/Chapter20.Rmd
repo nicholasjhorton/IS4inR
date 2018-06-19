@@ -1,7 +1,7 @@
 ---
 title: "Comparing Groups (Chapter 20)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -54,9 +49,12 @@ Note that some of the figures in this document may differ slightly from those in
 We can replicate the calculations in the example on the bottom of page 543.
 
 ```{r}
-n1 <- 248; p1 <- 0.57
-n2 <- 256; p2 <- 0.70
-sediff <- sqrt(p1*(1-p1)/n1 + p2*(1-p2)/n2); sediff
+n1 <- 248
+p1 <- 0.57
+n2 <- 256
+p2 <- 0.70
+sediff <- sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2)
+sediff
 ```
 
 ### Section 20.3: Confidence interval for a difference
@@ -71,39 +69,51 @@ We can replicate the values from the example on page 546.
 We can replicate the values from the example on pages 550-551.
 
 ```{r}
-n1 <- 293; y1 <- 205
-n2 <- 469; y2 <- 235
-ppooled <- (y1+y2)/(n1+n2); ppooled
-sepooled <- sqrt(ppooled*(1-ppooled)/n1 + ppooled*(1-ppooled)/n2); sepooled
-z <- (y1/n1 - y2/n2)/sepooled; z
-pval <- 2*pnorm(z, lower.tail = FALSE); pval
+n1 <- 293
+y1 <- 205
+n2 <- 469
+y2 <- 235
+ppooled <- (y1 + y2)/(n1 + n2)
+ppooled
+sepooled <- sqrt(ppooled*(1 - ppooled)/n1 + ppooled*(1 - ppooled)/n2)
+sepooled
+z <- (y1/n1 - y2/n2)/sepooled
+z
+pval <- 2*pnorm(z, lower.tail = FALSE)
+pval
 ```
 
 ### Section 20.6: Testing for a difference in means
 
 ```{r}
-n1 <- 8; n2 <- 7
-ybar1 <- 281.88; ybar2 <- 211.43
-s1 <- 18.31; s2 <- 46.43
-sediff <- sqrt(s1^2/n1 + s2^2/n2); sediff
-t <- (ybar1 - ybar2)/sediff; t
-pval <- 2*pt(t, df=7.62); pval
+n1 <- 8
+n2 <- 7
+ybar1 <- 281.88
+ybar2 <- 211.43
+s1 <- 18.31
+s2 <- 46.43
+sediff <- sqrt(s1^2/n1 + s2^2/n2)
+sediff
+t <- (ybar1 - ybar2)/sediff
+t
+pval <- 2*pt(t, df = 7.62)
+pval
 ```
 
-```{r message=FALSE}
+```{r message = FALSE}
 prices <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Camera_prices.csv")
 prices
 with(prices, t.test(Buying.from.a.Friend, Buying.from.a.Stranger))
 ```
 
-Let's turn this dataset in a lattice friendlier version.
-```{r}
+XX Let's turn this dataset in a lattice friendlier version.
+```{r warning = FALSE}
 ds <- with(prices, 
-  data.frame(price=c(Buying.from.a.Friend, Buying.from.a.Stranger),
-             group=c(rep("Friend", nrow(prices)), rep("Stranger", nrow(prices)))))
+  data.frame(price = c(Buying.from.a.Friend, Buying.from.a.Stranger),
+             group = c(rep("Friend", nrow(prices)), rep("Stranger", nrow(prices)))))
 ds
-t.test(price ~ group, data=ds)   # Unpooled
-t.test(price ~ group, var.equal=TRUE, data=ds)   # Pooled
-gf_boxplot(price ~ group, data=ds, col=c("seagreen3","steelblue2")) %>%
-  gf_labs(x="Group", y="Price")
+t.test(price ~ group, data = ds)   # Unpooled
+t.test(price ~ group, var.equal = TRUE, data = ds)   # Pooled
+gf_boxplot(price ~ group, data = ds, col = c("seagreen3","steelblue2")) %>%
+  gf_labs(x = "Group", y = "Price")
 ```
