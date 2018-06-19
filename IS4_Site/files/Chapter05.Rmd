@@ -46,8 +46,8 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 From page 111
 
 ```{r}
-library(mosaic); 
-library(readr); 
+library(mosaic) 
+library(readr)
 library(ggformula)
 options(na.rm = TRUE)
 options(digits = 3)
