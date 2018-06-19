@@ -1,7 +1,7 @@
 ---
 title: "Comparing Counts (Chapter 22)"
-author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -58,7 +53,8 @@ ballplayer <- c(137, 121, 116, 121, 126, 114,
                 102, 165, 134, 115, 105, 122)
 national <- c(0.08, 0.07, 0.08, 0.08, 0.08, 0.08,
               0.09, 0.09, 0.09, 0.09, 0.08, 0.09)
-n <- sum(~ ballplayer); n
+n <- sum(~ ballplayer)
+n
 sum(~ national)
 expect <- n*national
 cbind(ballplayer, expect)
@@ -66,7 +62,7 @@ cbind(ballplayer, expect)
 
 The chi-square quantile values in the table on the bottom of page 658 can be verified using the `xqt()` function.
 ```{r}
-xqchisq(c(.90, .95, .975, .99, .995), df=1)
+xqchisq(c(.90, .95, .975, .99, .995), df = 1)
 ```
 These results match the first row: other values can be calculated by changing the
 `df` argument.
@@ -75,8 +71,9 @@ The goodness of fit test on page 614 can be verified by calculating the
 chi-square statistic.
 
 ```{r}
-chisq <- sum((ballplayer-expect)^2/expect); chisq
-1-xpchisq(chisq, df=11,col="slateblue2")
+chisq <- sum((ballplayer - expect)^2/expect)
+chisq
+1 - xpchisq(chisq, df = 11, col = "slateblue2")
 ```
 
 ### Section 22.2: Chi-square test of homogeneity
@@ -85,7 +82,7 @@ Data from one university regarding
 the association between postgraduation activity and area of study
 is displayed in Table 22.1 (page 618).  
 
-```{r fig.height=5}
+```{r fig.height = 5}
 area <- c(rep("agriculture", 209), rep("arts/science", 198), 
           rep("engineering", 177), rep("ILR", 101),
 	  rep("agriculture", 104), rep("arts/science", 171), 
@@ -94,9 +91,9 @@ area <- c(rep("agriculture", 209), rep("arts/science", 198),
           rep("engineering", 39), rep("ILR", 16))
 activity <- c(rep("Employed", 685), rep("Grad school", 466), 
               rep("Other", 305))
-tally(~ activity + area, margins=TRUE)
-mosaicplot(tally(~ activity + area), main="Mosaicplot of Activity by area",
-  color=c("red","orange","tan2","yellow"),ylab="Area",xlab="Activity")
+tally(~ activity + area, margins = TRUE)
+vcd::mosaic(tally(~ activity + area), main = "Mosaicplot of Activity by area",
+  shade = TRUE, ylab = "Area", xlab = "Activity")
 xchisq.test(tally(~ activity + area))
 ```
 
