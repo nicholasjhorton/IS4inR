@@ -48,8 +48,8 @@ Note that some of the figures in this document may differ slightly from those in
 See Figure 3.1 on page 44.
 
 ```{r message = FALSE}
-library(mosaic);
-library(readr);
+library(mosaic)
+library(readr)
 library(ggformula)
 options(digits = 3)
 Tsunami <- 
