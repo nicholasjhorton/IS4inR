@@ -48,8 +48,8 @@ Note that some of the figures in this document may differ slightly from those in
 See Figure 4.1 on page 83.
 
 ```{r message = FALSE}
-library(mosaic);
-library(readr);
+library(mosaic)
+library(readr)
 library(ggformula)
 options(digits = 3)
 Hopkins <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Hopkins_Forest_2011.txt", 
