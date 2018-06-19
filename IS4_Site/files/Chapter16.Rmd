@@ -1,7 +1,7 @@
 ---
 title: "Confidence intervals for proportions (Chapter 16)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "JuLY 17, 2017"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -60,16 +55,19 @@ binom.test(48, n)    # exact binomial
 
 Calculation on page 429
 ```{r}
-phat <- 48/n; phat
-sep <- sqrt(phat*(1-phat)/n); sep    # matches value on page 429
-interval <- phat + c(-2, 2)*sep; interval
+phat <- 48/n
+phat
+sep <- sqrt(phat*(1 - phat)/n)
+sep    # matches value on page 429
+interval <- phat + c(-2, 2)*sep
+interval
 ```
 
 ### Section 16.2: Interpreting confidence intervals
 
-```{r warning=FALSE}
+```{r warning = FALSE}
 set.seed(1988)
-CIsim(n=100, samples=20)
+CIsim(n = 100, samples = 20)
 ```
 
 We would expect 19 out of 20 of the intervals to cover the true (population) value, but here only 18 out of 20 actually covered that value (see Figure at top of page 432).
@@ -79,16 +77,20 @@ We would expect 19 out of 20 of the intervals to cover the true (population) val
 We can replicate the calculation for the "For Example: Finding the margin of error Take 1" (page 434)
 
 ```{r}
-sdp <- sqrt(.5*.5/1010); sdp   # worst case margin of error (based on p=0.5)
-me <- 2*sdp; me
+sdp <- sqrt(.5*.5/1010)
+sdp   # worst case margin of error (based on p=0.5)
+me <- 2*sdp
+me
 ```
 
 We can replicate the calculation for the "For Example: Finding the margin of error Take 1" (pages 434-435)
 
 ```{r}
-qnorm(.95, mean=0, sd=1)   # z-star for 90% confidence interval
-sep <- sqrt(.4*.6/1010); sep
-me <- 1.6445*sep; me
+qnorm(.95, mean = 0, sd = 1)   # z-star for 90% confidence interval
+sep <- sqrt(.4*.6/1010)
+sep
+me <- 1.6445*sep
+me
 ```
 
 ### Section 16.4: Assumptions and Condition
@@ -96,10 +98,12 @@ me <- 1.6445*sep; me
 We can replicate the calculation for the "For Example: choosing a sample size" (page 438)
 
 ```{r}
-zstar <- qnorm(.975, mean=0, sd=1); zstar
+zstar <- qnorm(.975, mean = 0, sd = 1)
+zstar
 me <- 0.02 # desired margin of error
 p <- 0.40
-n <- (zstar*sqrt(p*(1-p))/me)^2; n
+n <- (zstar*sqrt(p*(1 - p))/me)^2
+n
 ```
 
 We will need about 2305 subjects to yield a margin of error of 2% under these assumptions.
