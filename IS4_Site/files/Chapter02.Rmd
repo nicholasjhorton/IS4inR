@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Displaying and Describing Catergorical Data (Chapter 2)"
-author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,30 +15,30 @@ output:
 ---
 
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Some customization.  You can alter or delete as desired (if you know what you are doing).
 
 # This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
+trellis.par.set(theme = theme.mosaic())  
 
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  tidy = FALSE,     # display code as typed
+  size = "small"    # slightly smaller font for code
 )
 ```
 
 ## Introduction and Background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -51,17 +51,21 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 See displays on page 17.
 
 ```{r message=FALSE}
-library(mosaic); library(readr); library(ggformula)
-options(digits=3)
-Titanic <- read_delim("https://nhorton.people.amherst.edu/sdm4/data/Titanic.txt", delim="\t")
-```
-```{r}
-tally(~ Class, data=Titanic)
-tally(~ Class, format="percent", data=Titanic)
+library(mosaic); 
+library(readr); 
+library(ggformula)
+options(digits = 3)
+Titanic <- read_delim("https://nhorton.people.amherst.edu/sdm4/data/Titanic.txt", 
+                      delim = "\t")
 ```
 
-```{r fig.align="center"}
-gf_bar(~Class, data=Titanic, stat="count",fill="aquamarine3")
+```{r}
+tally(~ Class, data = Titanic)
+tally(~ Class, format = "percent", data = Titanic)
+```
+
+```{r fig.align = "center"}
+gf_bar(~ Class, data = Titanic, stat = "count", fill = "aquamarine3")
 ```
 
 ### Section 2.2: Exploring the Relationship Between Two Categorical Variables
@@ -69,18 +73,19 @@ gf_bar(~Class, data=Titanic, stat="count",fill="aquamarine3")
 See display on page 19.
 
 ```{r}
-tally(~ Survived + Class, margin=TRUE, data=Titanic)
-tally(~ Survived | Class, format="percent", data=Titanic)
+tally(~ Survived + Class, margin = TRUE, data = Titanic)
+tally(~ Survived | Class, format = "percent", data = Titanic)
 ```
 
 See display on page 22.
 
-```{r fig.align="center"}
-gf_bar( ~ Class, fill= ~Survived, data=Titanic, position = position_dodge())
+```{r fig.align = "center"}
+gf_bar( ~ Class, fill = ~ Survived, data = Titanic, 
+        position = position_dodge())
 ```
 
-```{r fig.align="center"}
-mosaicplot(tally(~ Survived + Class, data=Titanic),
-           main="Mosaic plot of Class by Survival", col= c("lightskyblue","lightslateblue","lightskyblue3", "lightseagreen"))
+```{r fig.align = "center"}
+vcd::mosaic(tally(~ Survived + Class, data = Titanic),
+           main = "Mosaic plot of Class by Survival", shade = TRUE)
 ```
 
