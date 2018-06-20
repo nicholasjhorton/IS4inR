@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Understanding and Comparing Distributions (Chapter 4)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+date: "June 20, 2018"
 output: 
   pdf_document:
     fig_height: 3.3
@@ -64,7 +64,7 @@ gf_histogram(..density.. ~ AvgWindSpeed, binwidth = 0.5, center = 0.24,
 ```
 
 Here we reproduce Figure 4.2 on page 83.
-
+XX Figures y variable does not match textbook, summary outputs differ also
 ```{r}
 Hopkins <- mutate(Hopkins,
   Summer = Month >= 4 & Month <= 9,
