@@ -21,7 +21,7 @@ output:
 require(mosaic)
 ```
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
@@ -58,7 +58,7 @@ Hopkins <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Hopkins_Fores
 
 ```{r}
 names(Hopkins)   
-gf_histogram(..density..~ AvgWindSpeed, binwidth = 0.5, center = 0.24, 
+gf_histogram(..density.. ~ AvgWindSpeed, binwidth = 0.5, center = 0.24, 
              data = Hopkins, fill = "coral1", color = TRUE) %>%
   gf_labs(x = "Average wind speed (mph)", y = "Density")
 ```
@@ -72,7 +72,7 @@ Hopkins <- mutate(Hopkins,
   )
 gf_histogram(..density.. ~ AvgWindSpeed, binwidth = 0.5, center = 0.24, 
              data = filter(Hopkins, Summer == TRUE), 
-             fill = "blue2",color = TRUE) %>%
+             fill = "blue2", color = TRUE) %>%
   gf_labs(x = "Average summer wind speed (mph)", y = "Density")
 df_stats(~ AvgWindSpeed, data = filter(Hopkins, Summer == TRUE))
 gf_histogram(..density.. ~ AvgWindSpeed, binwidth = 0.5, center = 0.24, 
@@ -102,7 +102,7 @@ filter(Hopkins, Month == 6, AvgWindSpeed > 3.9) # in June
 ### Section 4.4: Timeplots: Order, Please!
 
 See Figures 4.4 through 4.6 starting on page 90.
-```{r}
+```{r message = FALSE}
 gf_point(AvgWindSpeed ~ DayofYear, data = Hopkins, color = "mediumpurple") 
 gf_point(AvgWindSpeed ~ DayofYear, data = Hopkins, alpha = 0) %>%
   gf_line(col = "navy")
