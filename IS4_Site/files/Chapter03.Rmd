@@ -64,7 +64,7 @@ nrow(Tsunami)
 
 ```{r}
 gf_histogram(~ Magnitude, binwidth = 0.5, center = 0.5/2, 
-             data = Tsunami,fill = "orange", col = TRUE) %>%
+             data = Tsunami, fill = "orange", col = TRUE) %>%
   gf_labs(y = "Count")
 
 gf_histogram((..count../sum(..count..)*100) ~ Magnitude, center = 0.5/2, 
@@ -83,7 +83,7 @@ Pulse_rates <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Pulse_rat
   delim = "\t")
 ```
 
-```{r}
+```{r message = FALSE}
 with(Pulse_rates, stem(Pulse))
 gf_dotplot(~ Pulse, data = Pulse_rates, fill = "red")
 ```
@@ -105,7 +105,7 @@ See calculation and Figure 3.11 on page 51.
 recent <- filter(Tsunami, Year >= 1989, Year <= 2013)
 nrow(recent)   
 median(~ Magnitude, data = recent)
-gf_histogram(..density..~ Magnitude, binwidth = 0.2, data =recent, 
+gf_histogram(..density.. ~ Magnitude, binwidth = 0.2, data = recent, 
              fill = "cornflowerblue", col = TRUE) %>%
   gf_labs(y = "Density")
 ```
