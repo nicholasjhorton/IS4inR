@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Stats Starts Here (Chapter 1)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 13, 2018"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,24 +15,18 @@ output:
 ---
 
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small"    # slightly smaller font for code
+  tidy = FALSE,     # display code as typed
+  size = "small"    # slightly smaller font for code
   
 )
 ```
@@ -40,7 +34,7 @@ opts_chunk$set(
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -54,12 +48,12 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 
 See table on page 7.
 
-```{r message=FALSE}
+```{r message = FALSE}
 library(mosaic)
 library(readr)
-options(digits=3)
+options(digits = 3)
 Tour <- read.delim("https://nhorton.people.amherst.edu/sdm4/data/Tour_de_France_2014.txt",
-    sep="\t", stringsAsFactors = FALSE)
+    sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ```{r}

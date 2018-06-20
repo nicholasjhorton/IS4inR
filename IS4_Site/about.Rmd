@@ -2,9 +2,9 @@
 title: "IS4 in R"
 ---
 
-This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` and `ggformula` packages, which were written to simplify the use of R for introductory statistics courses (see https://journal.r-project.org/archive/2017/RJ-2017-024 for more details). 
+This work leverages initiatives undertaken by [Project MOSAIC](http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` and `ggformula` packages, which were written to simplify the use of R for introductory statistics courses (see [here](https://journal.r-project.org/archive/2017/RJ-2017-024) for more details). 
 
-A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic).
+A short summary of the R needed to teach introductory statistics can be found in the [mosaic package vignettes](http://cran.r-project.org/web/packages/mosaic).
 <br>
 These materials are made available under a creative commons remix with attribution license.
 <br>

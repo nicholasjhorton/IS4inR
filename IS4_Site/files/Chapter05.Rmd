@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: The Standard Deviation as a Ruler and the Normal Model (Chapter 5)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 3
@@ -15,31 +15,26 @@ output:
 ---
 
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
 This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-web.org), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the `mosaic` package, which was written to simplify the use of R for introductory statistics courses. A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (http://cran.r-project.org/web/packages/mosaic). A paper describing the mosaic approach was published in the *R Journal*: https://journal.r-project.org/archive/2017/RJ-2017-024.
@@ -51,19 +46,21 @@ This work leverages initiatives undertaken by Project MOSAIC (http://www.mosaic-
 From page 111
 
 ```{r}
-library(mosaic); library(readr); library(ggformula)
-options(na.rm=TRUE)
-options(digits=3)
-(6.54-5.91)/0.56  # Dobrynska's jump was 2.18 SD's greater than the mean
+library(mosaic) 
+library(readr)
+library(ggformula)
+options(na.rm = TRUE)
+options(digits = 3)
+(6.54 - 5.91)/0.56  # Dobrynska's jump was 2.18 SD's greater than the mean
 ```
 
 ```{r}
-twohund<-as.vector(c(23.2,23.3,23.3,23.6,23.9,23.9,24.2,24.2,24.3,
-                     24.3,24.3,24.3,24.3,24.4,24.5,24.5,24.6,24.6,24.6,24.7,24.7,24.9,
-                     24.9,24.9,25.0,25.0,25.0,25.2,25.3,25.4,25.4,25.4,25.4,25.5,25.9,
-                     25.9,26.1))
+twohund <- as.vector(c(23.2, 23.3, 23.3, 23.6, 23.9, 23.9, 24.2, 24.2, 24.3, 
+                     24.3, 24.3, 24.3, 24.3, 24.4, 24.5, 24.5, 24.6, 24.6, 
+                     24.6, 24.7, 24.7, 24.9, 24.9, 24.9, 25.0, 25.0, 25.0, 
+                     25.2, 25.3, 25.4, 25.4, 25.4, 25.4, 25.5, 25.9, 25.9, 26.1))
 twohund <- data.frame(twohund)
-df_stats(~., data=twohund)
+df_stats(~ ., data = twohund)
 ```
 
 ### Section 5.2: Shifting and Scaling
@@ -72,16 +69,16 @@ df_stats(~., data=twohund)
 
 The 68-95-99.7 rule
 
-```{r, message=FALSE, warning=FALSE}
-xpnorm(c(-3, -1.96, -1, 1, 1.96, 3), mean=0, sd=1, verbose=FALSE)
-xpnorm(c(-3, -1.96, 1.96, 3), mean=0, sd=1, verbose=FALSE)
-xpnorm(c(-3, 3), mean=0, sd=1, verbose=FALSE)
+```{r, message = FALSE, warning = FALSE}
+xpnorm(c(-3, -1.96, -1, 1, 1.96, 3), mean = 0, sd = 1, verbose = FALSE)
+xpnorm(c(-3, -1.96, 1.96, 3), mean = 0, sd = 1, verbose = FALSE)
+xpnorm(c(-3, 3), mean = 0, sd = 1, verbose = FALSE)
 ```
 
 Step-by-step (page 120)
 
 ```{r}
-xpnorm(600, mean=500, sd=100)
+xpnorm(600, mean = 500, sd = 100)
 ```
 
 ### Section 5.4: Finding normal percentiles
@@ -89,35 +86,37 @@ xpnorm(600, mean=500, sd=100)
 as on page 121
 
 ```{r}
-xpnorm(680, mean=500, sd=100)
-qnorm(0.964, mean=500, sd=100)   # inverse of pnorm()
-qnorm(0.964, mean=0, sd=1)   # what is the z-score?
+xpnorm(680, mean = 500, sd = 100)
+qnorm(0.964, mean = 500, sd = 100)   # inverse of pnorm()
+qnorm(0.964, mean = 0, sd = 1)   # what is the z-score?
 ```
 
 or on page 122
 
 ```{r}
-xpnorm(450, mean=500, sd=100)
+xpnorm(450, mean = 500, sd = 100)
 ```
 
 and page 123
 
 ```{r}
-qnorm(.9, mean=500, sd=100)
-qnorm(.9, mean=0, sd=1)   # or as a Z-score
+qnorm(.9, mean = 500, sd = 100)
+qnorm(.9, mean = 0, sd = 1)   # or as a Z-score
 ```
 
 ### Section 5.5: Normal Probability Plots
 
 See Figure 5.8 on page 127
 
-```{r message=FALSE}
+```{r message = FALSE}
 Nissan <- 
 read_delim("http://nhorton.people.amherst.edu/sdm4/data/Nissan.txt",
-  delim="\t")
+  delim = "\t")
 ```
+
 ```{r}
-gf_histogram(..density..~ mpg, binwidth=1, center=0.5, data=Nissan, fill = "royalblue2", col=TRUE)
-gf_qq(~ mpg, data=Nissan) %>%
-  gf_labs(x="qnorm",y="mpg")
+gf_histogram(..density.. ~ mpg, binwidth = 1, center = 0.5, 
+             data = Nissan, fill = "royalblue2", col = TRUE)
+gf_qq(~ mpg, data = Nissan) %>%
+  gf_labs(x = "qnorm", y = "mpg")
 ```
