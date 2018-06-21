@@ -9,4 +9,4 @@ A short summary of the R needed to teach introductory statistics can be found in
 These materials are made available under a creative commons remix with attribution license.
 <br>
 <br>
-<p>[Nicholas J Horton](https://www.amherst.edu/people/facstaff/nhorton), Patrick S Frenett, and Vicki Ip (last updated August 12, 2017)</p>
+<p>[Nicholas J Horton](https://www.amherst.edu/people/facstaff/nhorton), Patrick S Frenett, Vicki Ip, and Sarah McDonald (last updated June 21, 2018)</p>
