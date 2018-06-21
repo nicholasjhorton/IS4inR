@@ -1,7 +1,7 @@
 ---
 title: "Random Variables and Probability Models (Chapter 14)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+date: "June 20, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -73,7 +73,7 @@ sd
 
 ### Section 14.3: Combining Random Variables
 
-Let's replicate the values from the example on page 367:
+Let's replicate the values from the example on page 367-368:
 
 ```{r}
 ex <- 5.83

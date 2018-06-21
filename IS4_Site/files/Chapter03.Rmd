@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Displaying and Summarizing Quantitative Data (Chapter 3)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+date: "June 20, 2018"
 output: 
   pdf_document:
     fig_height: 2.8
@@ -76,7 +76,7 @@ gf_histogram(..density.. ~ Magnitude, binwidth = 0.5, center = 0.5/2 + 0.001,
   gf_labs(y = "Density")
 ```
 
-Note that Figure 3.3 on page 47 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
+Note that Figure 3.3 on page 45 displays a histogram (with the y-axis measured by percent in each bar.  The first histogram displays the count and the last the density (where the total area of the bars adds up to 1).
 
 ```{r message=FALSE}
 Pulse_rates <- read_delim("http://nhorton.people.amherst.edu/sdm4/data/Pulse_rates.txt",
@@ -88,7 +88,7 @@ with(Pulse_rates, stem(Pulse))
 gf_dotplot(~ Pulse, data = Pulse_rates, fill = "red")
 ```
 
-Or on page 47.
+Or on page 46.
 
 ```{r}
 with(Pulse_rates, stem(Pulse, scale = 2))
