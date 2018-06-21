@@ -106,7 +106,10 @@ prices
 with(prices, t.test(Buying.from.a.Friend, Buying.from.a.Stranger))
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2cbe8f9c5e3f51ee12aaccd7d7428857a675889
 ```{r warning = FALSE}
 ds <- with(prices, 
   data.frame(price = c(Buying.from.a.Friend, Buying.from.a.Stranger),
