@@ -1,7 +1,7 @@
 ---
 title: "Inferences for Regression (Chapter 23)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+date: "June 21, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -134,7 +134,7 @@ The Pima Indian dataset example is given on pages 663-667.
 ```{r message = FALSE}
 Pima <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Pima_Indians_Diabetes.csv")
 Diabetes <- filter(Pima, BMI > 0)  # get rid of missing values for BMI
-gf_boxplot(BMI ~ as.factor(Diabetes), col = c("navy", "red"), data = Pima) %>%
+gf_boxplot(BMI ~ as.factor(Diabetes), color = ~as.factor(Diabetes), data = Pima) %>%
   gf_labs(x = "Diabetes")
 ```
 
