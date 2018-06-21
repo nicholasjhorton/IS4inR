@@ -74,7 +74,7 @@ BodyFat <- read.csv("http://nhorton.people.amherst.edu/sdm4/data/Body_fat_comple
 medians <- do(2000)*median(~ Weight, data = sample(BodyFat, 10, replace = FALSE))
 gf_histogram(..density.. ~ median, binwidth = 5, center = 5/2, 
   data = medians, fill = "mediumseagreen", color = TRUE) %>%
-  gf_labs(x = "Sampling distribution of medians",y = "Density")
+  gf_labs(x = "Sampling distribution of medians", y = "Density")
 
 variances <- do(2000)*var(~ Weight, data = sample(BodyFat, 10, replace = FALSE))
 gf_histogram(..density.. ~ var, binwidth = 100, center = 100/2, 
