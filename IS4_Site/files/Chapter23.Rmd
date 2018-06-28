@@ -72,7 +72,7 @@ msummary(BodyFatmod)
 rsquared(BodyFatmod)
 confint(BodyFatmod)    # see page 755
 ```
-XX Check to see if figures match chapter
+
 ```{r message = FALSE}
 # Figure 23.4
 gf_point(PctBF ~ waist, data = BodyFat, alpha = 0.7) %>%
