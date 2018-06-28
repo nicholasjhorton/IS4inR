@@ -1,7 +1,7 @@
 ---
 title: "Comparing Groups (Chapter 20)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 21, 2018"
+date: "June 22, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -106,6 +106,7 @@ prices
 with(prices, t.test(Buying.from.a.Friend, Buying.from.a.Stranger))
 ```
 
+
 ```{r warning = FALSE}
 ds <- with(prices, 
   data.frame(price = c(Buying.from.a.Friend, Buying.from.a.Stranger),
@@ -113,6 +114,6 @@ ds <- with(prices,
 ds
 t.test(price ~ group, data = ds)   # Unpooled
 t.test(price ~ group, var.equal = TRUE, data = ds)   # Pooled
-gf_boxplot(price ~ group, data = ds, col = c("seagreen3","steelblue2")) %>%
+gf_boxplot(price ~ group, data = ds) %>%
   gf_labs(x = "Group", y = "Price")
 ```
