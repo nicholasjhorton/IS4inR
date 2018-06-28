@@ -82,7 +82,7 @@ Data from one university regarding
 the association between postgraduation activity and area of study
 is displayed in Table 22.1 (page 618).  
 
-```{r fig.height = 5 }
+```{r}
 area1 <- rbind(
   do(209) * data.frame(activity = "agriculture", area = "Employed"),
   do(198) * data.frame(activity = "arts/science", area = "Employed"),
@@ -101,7 +101,7 @@ area1 <- rbind(
 tally(~ activity + area, margins = TRUE, data = area1)
 ```
 
-```{r}
+```{r fig.height = 5}
 vcd::mosaic(tally(~ activity + area, data = area1), main = "Mosaicplot of Activity by area",
   shade = TRUE, ylab = "Area", xlab = "Activity")
 xchisq.test(tally(~ activity + area, data = area1))
