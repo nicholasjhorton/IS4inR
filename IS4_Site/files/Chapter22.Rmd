@@ -1,7 +1,7 @@
 ---
 title: "Comparing Counts (Chapter 22)"
 author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+date: "June 28, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -56,7 +56,7 @@ national <- c(0.08, 0.07, 0.08, 0.08, 0.08, 0.08,
 n <- sum(~ ballplayer)
 n
 sum(~ national)
-expect <- n*national
+expect <- n * national
 cbind(ballplayer, expect)
 ```
 
