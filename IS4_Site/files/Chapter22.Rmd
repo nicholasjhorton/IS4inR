@@ -82,20 +82,31 @@ Data from one university regarding
 the association between postgraduation activity and area of study
 is displayed in Table 22.1 (page 618).  
 
-```{r fig.height = 5}
-area <- c(rep("agriculture", 209), rep("arts/science", 198), 
-          rep("engineering", 177), rep("ILR", 101),
-	  rep("agriculture", 104), rep("arts/science", 171), 
-          rep("engineering", 158), rep("ILR", 33),
-	  rep("agriculture", 135), rep("arts/science", 115), 
-          rep("engineering", 39), rep("ILR", 16))
-activity <- c(rep("Employed", 685), rep("Grad school", 466), 
-              rep("Other", 305))
-tally(~ activity + area, margins = TRUE)
-vcd::mosaic(tally(~ activity + area), main = "Mosaicplot of Activity by area",
-  shade = TRUE, ylab = "Area", xlab = "Activity")
-xchisq.test(tally(~ activity + area))
+```{r fig.height = 5 }
+area1 <- rbind(
+  do(209) * data.frame(activity = "agriculture", area = "Employed"),
+  do(198) * data.frame(activity = "arts/science", area = "Employed"),
+  do(177) * data.frame(activity = "engineering", area = "Employed"), 
+  do(101) * data.frame(activity = "ILR", area = "Employed"),
+  do(104) * data.frame(activity = "agriculture", area = "Grad school"),
+  do(171) * data.frame(activity = "arts/science", area = "Grad school"),
+  do(158) * data.frame(activity = "engineering", area = "Grad school"), 
+  do(33) * data.frame(activity = "ILR", area = "Grad school"),
+  do(135) * data.frame(activity = "agriculture", area = "Other"),
+  do(115) * data.frame(activity = "arts/science", area = "Other"),
+  do(39) * data.frame(activity = "engineering", area = "Other"), 
+  do(16) * data.frame(activity = "ILR", area = "Other")
+)
+
+tally(~ activity + area, margins = TRUE, data = area1)
 ```
+
+```{r}
+vcd::mosaic(tally(~ activity + area, data = area1), main = "Mosaicplot of Activity by area",
+  shade = TRUE, ylab = "Area", xlab = "Activity")
+xchisq.test(tally(~ activity + area, data = area1))
+```
+
 
 ### Section 22.3: Examining the residuals
 
