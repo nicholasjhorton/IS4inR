@@ -1,7 +1,7 @@
 ---
 title: "Comparing Counts (Chapter 22)"
 author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 28, 2018"
+date: "June 29, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -83,28 +83,28 @@ the association between postgraduation activity and area of study
 is displayed in Table 22.1 (page 618).  
 
 ```{r}
-area1 <- rbind(
-  do(209) * data.frame(activity = "agriculture", area = "Employed"),
+schooldata <- rbind(
+  do(209) * data.frame(activity = "agriculture",  area = "Employed"),
   do(198) * data.frame(activity = "arts/science", area = "Employed"),
-  do(177) * data.frame(activity = "engineering", area = "Employed"), 
-  do(101) * data.frame(activity = "ILR", area = "Employed"),
-  do(104) * data.frame(activity = "agriculture", area = "Grad school"),
+  do(177) * data.frame(activity = "engineering",  area = "Employed"), 
+  do(101) * data.frame(activity = "ILR",          area = "Employed"),
+  do(104) * data.frame(activity = "agriculture",  area = "Grad school"),
   do(171) * data.frame(activity = "arts/science", area = "Grad school"),
-  do(158) * data.frame(activity = "engineering", area = "Grad school"), 
-  do(33) * data.frame(activity = "ILR", area = "Grad school"),
-  do(135) * data.frame(activity = "agriculture", area = "Other"),
+  do(158) * data.frame(activity = "engineering",  area = "Grad school"), 
+  do(33)  * data.frame(activity = "ILR",          area = "Grad school"),
+  do(135) * data.frame(activity = "agriculture",  area = "Other"),
   do(115) * data.frame(activity = "arts/science", area = "Other"),
-  do(39) * data.frame(activity = "engineering", area = "Other"), 
-  do(16) * data.frame(activity = "ILR", area = "Other")
+  do(39)  * data.frame(activity = "engineering",  area = "Other"), 
+  do(16)  * data.frame(activity = "ILR",          area = "Other")
 )
 
-tally(~ activity + area, margins = TRUE, data = area1)
+tally(~ activity + area, margins = TRUE, data = schooldata)
 ```
 
 ```{r fig.height = 5}
-vcd::mosaic(tally(~ activity + area, data = area1), main = "Mosaicplot of Activity by area",
+vcd::mosaic(tally(~ activity + area, data = schooldata), main = "Mosaicplot of Activity by area",
   shade = TRUE, ylab = "Area", xlab = "Activity")
-xchisq.test(tally(~ activity + area, data = area1))
+xchisq.test(tally(~ activity + area, data = schooldata))
 ```
 
 
