@@ -1,7 +1,7 @@
 ---
 title: "Inferences for Regression (Chapter 23)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+date: "June 21, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -51,10 +46,12 @@ Note that some of the figures in this document may differ slightly from those in
 
 ### Section 23.1: The population and the sample
 
-```{r message=FALSE}
-library(mosaic); library(readr)
+```{r message = FALSE}
+library(mosaic)
+library(readr)
 BodyFat <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Body_fat_complete.csv")
 ```
+
 ```{r}
 dim(BodyFat)
 glimpse(BodyFat)
@@ -62,7 +59,7 @@ glimpse(BodyFat)
 
 We can confirm the coefficients from the model on page 645.
 ```{r}
-BodyFatmod <- lm(PctBF ~ waist, data=BodyFat)
+BodyFatmod <- lm(PctBF ~ waist, data = BodyFat)
 coef(BodyFatmod)
 ```
 
@@ -76,29 +73,29 @@ rsquared(BodyFatmod)
 confint(BodyFatmod)    # see page 755
 ```
 
-```{r}
+```{r message = FALSE}
 # Figure 23.4
-gf_point(PctBF ~ waist,data=BodyFat,alpha=0.7) %>%
-  gf_labs(x="Waist (in.)") %>%
+gf_point(PctBF ~ waist, data = BodyFat, alpha = 0.7) %>%
+  gf_labs(x = "Waist (in.)") %>%
   gf_lm() %>%
-  gf_smooth(col="red", se=FALSE)
+  gf_smooth(col = "red", se = FALSE)
 
 # Figure 23.5
-gf_point(resid(BodyFatmod) ~ waist,data=BodyFat) %>%
-  gf_labs(x="Waist (in.)") %>%
+gf_point(resid(BodyFatmod) ~ waist, data = BodyFat) %>%
+  gf_labs(x = "Waist (in.)") %>%
   gf_lm() %>%
-  gf_smooth(col="red")
+  gf_smooth(col = "red")
   
 # equiv of Figure 23.6 note that Figure 23.6 refers to the diamonds dataset
-gf_point(resid(BodyFatmod) ~ fitted(BodyFatmod),data=BodyFat) %>%
-  gf_labs(x="Predicted values", y="Residuals") %>%
+gf_point(resid(BodyFatmod) ~ fitted(BodyFatmod), data = BodyFat) %>%
+  gf_labs(x = "Predicted values", y = "Residuals") %>%
   gf_lm() %>%
-  gf_smooth(col="red")
+  gf_smooth(col = "red")
 
 # Figure on bottom of page 650
-gf_qq(~ resid(BodyFatmod), col="royalblue2", alpha=0.7) %>%
+gf_qq(~ resid(BodyFatmod), col = "royalblue2", alpha = 0.7) %>%
   gf_qqline() %>%
-  gf_labs(x = "qnorm", y="resid(BodyFatmod)")
+  gf_labs(x = "qnorm", y = "resid(BodyFatmod)")
 ```
 
 
@@ -107,8 +104,8 @@ gf_qq(~ resid(BodyFatmod), col="royalblue2", alpha=0.7) %>%
 We can reproduce Figure 23.12 (page 662) using the `gf_lm(interval = )` function.
 
 ```{r}
-gf_point(PctBF ~ waist, data=BodyFat, cex=0.5) %>%
-  gf_lm(interval = "prediction", col="blue", fill = "green") %>%
+gf_point(PctBF ~ waist, data = BodyFat, cex = 0.5) %>%
+  gf_lm(interval = "prediction", col = "blue", fill = "green") %>%
   gf_lm(interval = "confidence", fill = "purple")
 ```
 
@@ -118,14 +115,15 @@ dim(Craters)
 Craters <- mutate(Craters,
                   logDiam = log(Diam.km.),
                   logAge = log(age..Ma.))
-Cratermod <- lm(logDiam ~ logAge, data=Craters)
-df_stats(~ logAge, data=Craters) # note example in book has n=39
+Cratermod <- lm(logDiam ~ logAge, data = Craters)
+df_stats(~ logAge, data = Craters) # note example in book has n=39
 ```
 
 ```{r}
-confpred <- predict(Cratermod, interval="confidence")
-intpred <- predict(Cratermod, interval="prediction")
-select(Craters, -Name) %>% head(., 3)
+confpred <- predict(Cratermod, interval = "confidence")
+intpred <- predict(Cratermod, interval = "prediction")
+select(Craters, -Name) %>% 
+  head(., 3)
 head(confpred, 3)
 head(intpred, 3)
 ```
@@ -133,17 +131,17 @@ head(intpred, 3)
 #### Section 23.7: Logistic regression
 
 The Pima Indian dataset example is given on pages 663-667.
-```{r message=FALSE}
+```{r message = FALSE}
 Pima <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Pima_Indians_Diabetes.csv")
-Diabetes <- filter(Pima, BMI>0)  # get rid of missing values for BMI
-gf_boxplot(BMI ~ as.factor(Diabetes), col = c("navy", "red"), data=Pima) %>%
-  gf_labs(x="Diabetes")
+Diabetes <- filter(Pima, BMI > 0)  # get rid of missing values for BMI
+gf_boxplot(BMI ~ as.factor(Diabetes), color = ~as.factor(Diabetes), data = Pima) %>%
+  gf_labs(x = "Diabetes")
 ```
 
 ```{r fig.keep="last"}
-pimamod <- glm(Diabetes ~ BMI, family="binomial", data=Pima)
+pimamod <- glm(Diabetes ~ BMI, family = "binomial", data = Pima)
 f2 <- makeFun(pimamod)
-gf_point(Diabetes ~ BMI, data=Pima, alpha=0.6, col="red") %>%
+gf_point(Diabetes ~ BMI, data = Pima, alpha = 0.6, col = "red") %>%
   gf_fun(pimamod)
 msummary(pimamod)
 ```

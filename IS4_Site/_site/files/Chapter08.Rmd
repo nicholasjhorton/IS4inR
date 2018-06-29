@@ -1,7 +1,7 @@
 ---
 title: "IS4 in R: Regression Wisdom (Chapter 8)"
 author: "Patrick Frenett, Vickei Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -54,59 +49,62 @@ Note that some of the figures in this document may differ slightly from those in
 
 Figure 8.1 (page 215) displays the scatterplot of heart rate vs duration for the Penguins dataset (along with a superimposed regression line and a smoother).
 
-```{r message=FALSE}
-library(mosaic); library(readr)
-options(digits=3)
+```{r message = FALSE}
+library(mosaic)
+library(readr)
+options(digits = 3)
 Penguins <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Penguins.csv")
-gf_point(DiveHeartRate ~ Duration, data=Penguins) %>%
-  gf_labs(x="Duration (mins)",y="Dive Heart Rate (bpm)") %>%
+gf_point(DiveHeartRate ~ Duration, data = Penguins) %>%
+  gf_labs(x = "Duration (mins)", y = "Dive Heart Rate (bpm)") %>%
   gf_lm() %>%
-  gf_smooth(col="red", se=FALSE)
+  gf_smooth(col = "red", se = FALSE)
 ```
 
 Figure 8.2 (page 215) displays the residuals from a linear regression model as a function of duration.
 
-```{r}
-Penguinmod <- lm(DiveHeartRate ~ Duration, data=Penguins)
-gf_point(resid(Penguinmod) ~ Duration, data=Penguins) %>%
-  gf_smooth(col="darkslategray", se=FALSE)
+```{r message = FALSE}
+Penguinmod <- lm(DiveHeartRate ~ Duration, data = Penguins)
+gf_point(resid(Penguinmod) ~ Duration, data = Penguins) %>%
+  gf_smooth(col = "darkslategray", se = FALSE)
 ```
 
 Figure 8.3 (page 216) displays the histogram of residuals for the cereal data from Chapter 7.
 
-```{r message=FALSE}
+```{r message = FALSE}
 Cereals <- read_csv("https://nhorton.people.amherst.edu/sdm4/data/Cereals.csv")
-Cerealmod <- lm(calories ~ sugars, data=Cereals)
-gf_histogram(..density..~ resid(Cerealmod),binwidth=7.5, center=3.75, fill="darkseagreen3", col=TRUE) %>% 
-  gf_labs(y="Density")
+Cerealmod <- lm(calories ~ sugars, data = Cereals)
+gf_histogram(..density.. ~ resid(Cerealmod), binwidth = 7.5, center = 3.75, 
+             fill = "darkseagreen3",  col = TRUE) %>% 
+  gf_labs(y = "Density")
 ```
 
 Figure 8.4 (page 216) displays a scatterplot of the residuals vs predicted values.  Without jittering, the display has an odd pattern.
 
 ```{r}
-gf_point(resid(Cerealmod) ~ fitted(Cerealmod), col="forestgreen")
+gf_point(resid(Cerealmod) ~ fitted(Cerealmod), col = "forestgreen")
 ```
 
 By adding some random noise we can more easily observe values that are shared by more than one cereal.
 
 ```{r}
-gf_jitter(resid(Cerealmod) ~ fitted(Cerealmod), alpha = 0.5, width = 0.2, height = 0, col="darkslateblue")
+gf_jitter(resid(Cerealmod) ~ fitted(Cerealmod), alpha = 0.5, width = 0.2, 
+          height = 0, col="darkslateblue")
 ```
 
 Figure 8.5 (page 217) displays the scatterplot stratified by what shelf it is displayed on at the store.
 
 ```{r}
-tally(~ shelf, data=Cereals)
+tally(~ shelf, data = Cereals)
 Cereals <- mutate(Cereals, ShelfGroup = derivedFactor(
-  bottomshelf = shelf==1,
-  middleshelf = shelf==2,
-  topshelf = shelf==3
+  bottomshelf = shelf == 1,
+  middleshelf = shelf == 2,
+  topshelf = shelf == 3
 ))
-tally(~ ShelfGroup, data=Cereals)
-gf_point(calories ~ sugars,group = ~ShelfGroup,col= ~ShelfGroup, data=Cereals,
-         xlab="Amount of Sugar",ylab="Number of Calories") %>%
+tally(~ ShelfGroup, data = Cereals)
+gf_point(calories ~ sugars, group = ~ ShelfGroup, col = ~ ShelfGroup, 
+         data = Cereals, xlab = "Amount of Sugar", ylab = "Number of Calories") %>%
   gf_lm() %>%
-  gf_labs(x="Amount of Sugar", y="Number of Calories")
+  gf_labs(x = "Amount of Sugar", y = "Number of Calories")
 ```
 
 
@@ -114,14 +112,17 @@ gf_point(calories ~ sugars,group = ~ShelfGroup,col= ~ShelfGroup, data=Cereals,
 
 The `plot` function from base R will give a line graph if it's type is specified as "b" for both points and lines. `?help` will give the full list of types of graphs `plot` can generate. Below is figure 8.8 on page 219.
 
-```{r message=FALSE}
+```{r warning = FALSE}
 Oil <- read_csv("http://www3.amherst.edu/~nhorton/sdm4/data/Historical_Oil_Prices_2014.csv")
-Oil <- Oil[1:42,]
-gf_point(Oil$`Nominal Price(EIA)` ~ Oil$`Years since 1970`, alpha=0.5,col="red") %>%
-  gf_line(alpha=0.5, col="red") %>%
-  gf_labs(x = "Years Since 1970", y="Price (2005 $)") %>%
-  gf_point(Oil$`AE098 Forecast in 2014$`~ Oil$`Years since 1970`, alpha=0.5, col="green") %>%
-  gf_point(Oil$`AE099 Forecast in 2014$` ~ Oil$`Years since 1970`, alpha=0.5, col="blue")
+Oil <- Oil[1:42, ]
+gf_point(Oil$`Nominal Price(EIA)` ~ Oil$`Years since 1970`, 
+         alpha = 0.5, col = "red") %>%
+  gf_line(alpha = 0.5, col = "red") %>%
+  gf_labs(x = "Years Since 1970", y = "Price (2005 $)") %>%
+  gf_point(Oil$`AE098 Forecast in 2014$` ~ Oil$`Years since 1970`, 
+           alpha = 0.5, col = "green") %>%
+  gf_point(Oil$`AE099 Forecast in 2014$` ~ Oil$`Years since 1970`, 
+           alpha = 0.5, col = "blue")
 ```
 
 
@@ -129,13 +130,13 @@ gf_point(Oil$`Nominal Price(EIA)` ~ Oil$`Years since 1970`, alpha=0.5,col="red")
 
 To get the two regression lines shown by figure 8.10 on page 222 the `filter` function is used to create a dataset without the Palm Beach measurement. The `gf_point` function and `gf_lm` functions together will add the regression lines.
 
-```{r message=FALSE}
+```{r message = FALSE}
 Election2000 <- read_csv("http://www3.amherst.edu/~nhorton/sdm4/data/Election_2000.csv")
 
 Election2000_2 <- filter(Election2000, Buchanan < 2000)
 
-gf_point(Buchanan ~ Nader, data=Election2000, alpha=0.7) %>%
-    gf_lm(Buchanan ~ Nader, data=Election2000, col="blue") %>%
-  gf_lm(Buchanan ~ Nader, data=Election2000_2, col="red")
+gf_point(Buchanan ~ Nader, data = Election2000, alpha = 0.7) %>%
+    gf_lm(Buchanan ~ Nader, data = Election2000, col = "blue") %>%
+  gf_lm(Buchanan ~ Nader, data = Election2000_2, col = "red")
 ```
 

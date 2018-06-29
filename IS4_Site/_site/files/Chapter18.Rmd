@@ -1,7 +1,7 @@
 ---
 title: "Inferences about Means (Chapter 18)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 16, 2016"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-  ```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.align="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.align = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -56,38 +51,43 @@ Let's begin by reproducing the figure on the bottom of page 475.
 ```{r}
 mu <- 1309
 sd <- 15.7
-xpnorm(c(mu-3*sd, mu-2*sd, mu-sd, mu+sd, mu+2*sd, mu+3*sd), mean=mu, sd=sd)
+xpnorm(c(mu - 3*sd, mu - 2*sd, mu - sd, mu + sd, mu + 2*sd, mu + 3*sd), mean = mu, sd = sd)
 ```
 
 ### Section 18.2: Gosset's t
 
 Figure 18.1 (page 477) displays a normal curve (dashed green curve) and a t-model with 2 degrees of freedom (solid blue curve).
 
-```{r fig.keep="last"}
-gf_dist("norm", col="green", linetype="dashed")
+```{r fig.keep = "last"}
+gf_dist("norm", col = "green", linetype = "dashed")
 
-gf_dist("norm", col="green", linetype="dashed", xlim=c(-4,4)) %>%
-  gf_dist("t", params=2, col="blue", xlim=c(-4,4))
+gf_dist("norm", col = "green", linetype = "dashed", xlim = c(-4,4)) %>%
+  gf_dist("t", params = 2, col = "blue", xlim = c(-4,4))
 ```
 
 We can reproduce the calculations for the Farmed salmon example (pages 479-480) using summary statistics:
 
 ```{r}
-n <- 150; ybar <- 0.0913; s = 0.0495
-tstar <- qt(0.975, df=n-1); tstar
+n <- 150
+ybar <- 0.0913
+s = 0.0495
+tstar <- qt(0.975, df = n-1)
+tstar
 ybar + c(-tstar, tstar)*s/sqrt(n)
 ```
 
 or directly:
 
-```{r message=FALSE}
+```{r message = FALSE}
 Salmon <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Farmed_Salmon.csv")
 ```
-```{r}
-df_stats(~ Mirex, data=Salmon)
-gf_histogram(..density..~ Mirex, binwidth=0.01, center=0.01/2, data=Salmon,fill="royalblue2", col=TRUE) %>%
-  gf_labs(y="Density")
-t.test(~ Mirex, data=Salmon)
+
+```{r warning = FALSE}
+df_stats(~ Mirex, data = Salmon)
+gf_histogram(..density.. ~ Mirex, binwidth = 0.01, center = 0.01/2, 
+             data = Salmon, fill = "royalblue2", col = TRUE) %>%
+  gf_labs(y = "Density")
+t.test(~ Mirex, data = Salmon)
 ```
 
 We note that the distribution of measurements is not particularly normal.
@@ -97,7 +97,8 @@ We note that the distribution of measurements is not particularly normal.
 We can carry out the one-sided test outlined on page 486:
 
 ```{r}
-tval <- (.0913-0.08)/0.0040; tval
-1-xpt(tval, df=149)
+tval <- (.0913 - 0.08)/0.0040
+tval
+1-xpt(tval, df = 149)
 ```
 

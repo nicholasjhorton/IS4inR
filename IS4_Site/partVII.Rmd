@@ -1,6 +1,6 @@
 <h2>
 <center>
-"Part VII Inference When Variables are Related"
+Part VII: Inference When Variables are Related
 </center>
 </h2>
 
@@ -11,5 +11,5 @@
 
 Title  | Links to Rmd and PDF files
 ------------- | -------------
-Chapter 24* : Analysis of Variance | <a href='files/Chapter24.Rmd'>.Rmd File</a> <a href='files/Chapter24.pdf'>(pdf)</a>
-Chapter 25* : Multiple Regression | <a href='files/Chapter25.Rmd'>.Rmd File</a> <a href='files/Chapter25.pdf'>(pdf)</a>
+Chapter 24* : Analysis of Variance | <a href='files/Chapter24.Rmd'>.Rmd File</a> <a href='files/Chapter24.pdf'>(pdf) [pdf of chapter](IS4_SE_C24.pdf)</a>
+Chapter 25* : Multiple Regression | <a href='files/Chapter25.Rmd'>.Rmd File</a> <a href='files/Chapter25.pdf'>(pdf) [pdf of chapter](IS4_SE_C25.pdf)</a>

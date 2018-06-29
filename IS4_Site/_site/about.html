@@ -20,9 +20,11 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +33,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -88,6 +92,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -239,8 +246,8 @@ $(document).ready(function () {
 </div>
 
 
-<p>This work leverages initiatives undertaken by Project MOSAIC (<a href="http://www.mosaic-web.org" class="uri">http://www.mosaic-web.org</a>), an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the <code>mosaic</code> and <code>ggformula</code> packages, which were written to simplify the use of R for introductory statistics courses (see <a href="https://journal.r-project.org/archive/2017/RJ-2017-024" class="uri">https://journal.r-project.org/archive/2017/RJ-2017-024</a> for more details).</p>
-A short summary of the R needed to teach introductory statistics can be found in the mosaic package vignettes (<a href="http://cran.r-project.org/web/packages/mosaic" class="uri">http://cran.r-project.org/web/packages/mosaic</a>). <br> These materials are made available under a creative commons remix with attribution license. <br> <br>
+<p>This work leverages initiatives undertaken by <a href="http://www.mosaic-web.org">Project MOSAIC</a>, an NSF-funded effort to improve the teaching of statistics, calculus, science and computing in the undergraduate curriculum. In particular, we utilize the <code>mosaic</code> and <code>ggformula</code> packages, which were written to simplify the use of R for introductory statistics courses (see <a href="https://journal.r-project.org/archive/2017/RJ-2017-024">here</a> for more details).</p>
+A short summary of the R needed to teach introductory statistics can be found in the <a href="http://cran.r-project.org/web/packages/mosaic">mosaic package vignettes</a>. <br> These materials are made available under a creative commons remix with attribution license. <br> <br>
 <p>
 <a href="https://www.amherst.edu/people/facstaff/nhorton">Nicholas J Horton</a>, Patrick S Frenett, and Vicki Ip (last updated August 12, 2017)
 </p>

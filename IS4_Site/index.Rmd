@@ -8,4 +8,4 @@ More information about the book can be found [here](http://wps.aw.com/aw_deveaux
 
 Other resources related to the mosaic package can be found under the 'Other Resources' tab. 
 
-![STATS: IS4inR cover](IS4inR.jpg)]
+![STATS: IS4inR cover](IS4inR.jpg)

@@ -1,7 +1,7 @@
 ---
 title: "Analysis of Variance (Chapter 24)"
 author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "July 17, 2017"
+date: "June 19, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -15,31 +15,26 @@ output:
 ---
   
   
-```{r, include=FALSE}
+```{r, include = FALSE}
 # Don't delete this chunk if you are using the mosaic package
 # This loads the mosaic and dplyr packages
 require(mosaic)
 ```
 
-```{r, include=FALSE}
-# Some customization.  You can alter or delete as desired (if you know what you are doing).
-
-# This changes the default colors in lattice plots.
-trellis.par.set(theme=theme.mosaic())  
-
+```{r, include = FALSE}
 # knitr settings to control how R chunks work.
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
-  fig.algin="center"
+  tidy = FALSE,     # display code as typed
+  size = "small",    # slightly smaller font for code
+  fig.algin = "center"
 )
 ```
 
 ## Introduction and background 
 
 This document is intended to help describe how to undertake analyses introduced 
-as examples in the Fourth Edition of \emph{Intro Stats} (2013) by De Veaux, Velleman, and Bock.
+as examples in the Fourth Edition of *Intro Stats* (2013) by De Veaux, Velleman, and Bock.
 More information about the book can be found at http://wps.aw.com/aw_deveaux_stats_series.  This
 file as well as the associated R Markdown reproducible analysis source file used to create it can be found at https://nhorton.people.amherst.edu/is4.
 
@@ -55,20 +50,20 @@ The graph in Figure 24.1 (page 701) can be generated using the `bwplot()` functi
 
 ```{r message = FALSE}
 Soap <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Bacterial_Soap.csv")
-gf_boxplot(Bacterial.Counts ~ Method, data=Soap, col="royalblue2")
+gf_boxplot(Bacterial.Counts ~ Method, data = Soap, col = "royalblue2")
 ```
 
 The example on page 704 considers the outcomes in hand volumes for three treatments
 post surgery.
-```{r message=FALSE}
+```{r warning = FALSE}
 Contrast <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Contrast_baths.csv")
-gf_boxplot(Hand.Vol.Chg ~ Treatment, data=Contrast, col="lightsteelblue4")
+gf_boxplot(Hand.Vol.Chg ~ Treatment, data = Contrast, col = "lightsteelblue4")
 ```
 
 The summary statistics at the bottom of page 705 can be calculated using `favstats()`.
 
 ```{r}
-df_stats(Bacterial.Counts ~ Method, data=Soap)
+df_stats(Bacterial.Counts ~ Method, data = Soap)
 ```
 
 ### Section 24.2: The ANOVA table
@@ -76,15 +71,16 @@ df_stats(Bacterial.Counts ~ Method, data=Soap)
 The `aov()` function can be used to fit an analysis of variance model.
 
 ```{r}
-aovmod <- aov(Bacterial.Counts ~ Method, data=Soap)
+aovmod <- aov(Bacterial.Counts ~ Method, data = Soap)
 summary(aovmod)
 ```
 
 This model has 3 degrees of freedom for the model (numerator) and 28 degrees of
 freedom for the error (denominator).  The `xpf()` function can replicate the calculation of the exact p-value (and generate Figure 24.4, page 708).
 
+XX Check figure, if similar in textbook
 ```{r}
-xpf(7.0636, df1=3, df2=28)
+xpf(7.0636, df1 = 3, df2 = 28)
 ```
 
 
@@ -97,8 +93,10 @@ model.tables(aovmod)
 The residual standard deviation can be calculated (page 713).
 
 ```{r}
-n <- 32; k <- 4
-sp <- sqrt(sum(resid(aovmod)^2/(n-k))); sp
+n <- 32
+k <- 4
+sp <- sqrt(sum(resid(aovmod)^2/(n - k)))
+sp
 sqrt(1410)
 ```
 
@@ -106,7 +104,7 @@ We can also see how the results are equivalent when fitting a regression model
 with indicators.
 
 ```{r}
-lmmod <- lm(Bacterial.Counts ~ Method, data=Soap)
+lmmod <- lm(Bacterial.Counts ~ Method, data = Soap)
 msummary(lmmod)
 ```
 
@@ -115,7 +113,7 @@ msummary(lmmod)
 A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `bwplot()` function. Figure 24.6 is made using the `qqmath` function.
 
 ```{r}
-gf_boxplot(resid(lmmod) ~ Method, data=Soap)
-gf_qq(~ resid(lmmod), data=Soap, col="lightcoral") %>%
-  gf_labs(x="qnorm", y="resid(lmmod)")
+gf_boxplot(resid(lmmod) ~ Method, data = Soap)
+gf_qq(~ resid(lmmod), data = Soap, col = "lightcoral") %>%
+  gf_labs(x = "qnorm", y = "resid(lmmod)")
 ```
