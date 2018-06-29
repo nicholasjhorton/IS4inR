@@ -1,7 +1,7 @@
 ---
 title: "Analysis of Variance (Chapter 24)"
-author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
-date: "June 19, 2018"
+author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
+date: "June 29, 2018"
 output: 
   pdf_document:
     fig_height: 4
@@ -46,7 +46,7 @@ Note that some of the figures in this document may differ slightly from those in
 
 ### Section 24.1: Testing whether the means of several groups are zero
 
-The graph in Figure 24.1 (page 701) can be generated using the `bwplot()` function.
+The graph in Figure 24.1 (page 701) can be generated using the `gf_boxplot()` function.
 
 ```{r message = FALSE}
 Soap <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Bacterial_Soap.csv")
@@ -60,10 +60,10 @@ Contrast <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Contrast_bath
 gf_boxplot(Hand.Vol.Chg ~ Treatment, data = Contrast, col = "lightsteelblue4")
 ```
 
-The summary statistics at the bottom of page 705 can be calculated using `favstats()`.
+The summary statistics at the bottom of page 705 can be calculated using `favstats()` (or `df_stats()`).
 
 ```{r}
-df_stats(Bacterial.Counts ~ Method, data = Soap)
+favstats(Bacterial.Counts ~ Method, data = Soap)
 ```
 
 ### Section 24.2: The ANOVA table
@@ -78,7 +78,6 @@ summary(aovmod)
 This model has 3 degrees of freedom for the model (numerator) and 28 degrees of
 freedom for the error (denominator).  The `xpf()` function can replicate the calculation of the exact p-value (and generate Figure 24.4, page 708).
 
-XX Check figure, if similar in textbook
 ```{r}
 xpf(7.0636, df1 = 3, df2 = 28)
 ```
@@ -110,7 +109,8 @@ msummary(lmmod)
 
 ### Section 24.3: Assumptions and Conditions
 
-A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `bwplot()` function. Figure 24.6 is made using the `qqmath` function.
+A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `gf_boxplot()` function. Figure 24.6 is made using 
+the `gf_qq()` function.
 
 ```{r}
 gf_boxplot(resid(lmmod) ~ Method, data = Soap)

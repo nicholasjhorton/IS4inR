@@ -1,6 +1,6 @@
 ---
 title: "Analysis of Variance (Chapter 24)"
-author: "Patrick Frenett, Vickie Ip, and Nicholas Horton (nhorton@amherst.edu)"
+author: "Patrick Frenett, Vickie Ip, Sarah McDonald, and Nicholas Horton (nhorton@amherst.edu)"
 date: "June 29, 2018"
 output: 
   pdf_document:
@@ -60,10 +60,10 @@ Contrast <- read.csv("https://nhorton.people.amherst.edu/sdm4/data/Contrast_bath
 gf_boxplot(Hand.Vol.Chg ~ Treatment, data = Contrast, col = "lightsteelblue4")
 ```
 
-The summary statistics at the bottom of page 705 can be calculated using `df_stats()`.
+The summary statistics at the bottom of page 705 can be calculated using `favstats()` (or `df_stats()`).
 
 ```{r}
-df_stats(Bacterial.Counts ~ Method, data = Soap)
+favstats(Bacterial.Counts ~ Method, data = Soap)
 ```
 
 ### Section 24.2: The ANOVA table
@@ -109,7 +109,8 @@ msummary(lmmod)
 
 ### Section 24.3: Assumptions and Conditions
 
-A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `gf_boxplot()` function. Figure 24.6 is made using the `gf_qq` function.
+A box plot of the residuals shown by figure 24.5 on page 715 can be generated with the `gf_boxplot()` function. Figure 24.6 is made using 
+the `gf_qq()` function.
 
 ```{r}
 gf_boxplot(resid(lmmod) ~ Method, data = Soap)
